@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hevs.flutter.projet.projet_connected_t_shirt">
    <application
-        android:label="projet_connected_t_shirt"
+        android:label="Connected T-Shirt"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

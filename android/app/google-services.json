@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "929385443763",
+    "project_id": "flutterconnectedtshirt",
+    "storage_bucket": "flutterconnectedtshirt.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:929385443763:android:00d11ee53fd1d22c3f1bc6",
+        "android_client_info": {
+          "package_name": "com.hevs.flutter.projet.projet_connected_t_shirt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "929385443763-gu2ectta1vpc8bquupt1kdkvk4k71uv2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPmuBB9jwnXdnM_28Rt-k4h9vQk7w7ncI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "929385443763-gu2ectta1vpc8bquupt1kdkvk4k71uv2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
