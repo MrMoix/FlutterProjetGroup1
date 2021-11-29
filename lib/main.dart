@@ -3,10 +3,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
+import 'package:projet_connected_t_shirt/screens/chartsPage.dart';
 import 'package:projet_connected_t_shirt/screens/dashBoardPage.dart';
 import 'package:projet_connected_t_shirt/screens/homepage.dart';
 import 'package:projet_connected_t_shirt/screens/loginpage.dart';
-import 'package:projet_connected_t_shirt/screens/plotsPage.dart';
+import 'package:projet_connected_t_shirt/screens/dataPage.dart';
 import 'package:projet_connected_t_shirt/screens/settingsPage.dart';
 
 void main() {
@@ -27,18 +28,25 @@ class tabBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DefaultTabController(
-        length: 3,
+        length: 4,
         child: Scaffold(
           appBar: AppBar(
+            backgroundColor: Colors.deepOrange,
             bottom: const TabBar(
+
               tabs: [
+
                 Tab(
-                  icon: Icon(Icons.leaderboard),
+                  icon: Icon(Icons.list),
+                  text: 'All data',
+                ),
+                Tab(
+                  icon: Icon(Icons.trending_up),
                   text: 'Charts',
                 ),
                 Tab(
                   icon: Icon(Icons.dashboard),
-                  text: 'Dashboard',
+                  text: 'Board',
                 ),
                 Tab(
                   icon: Icon(Icons.settings),
@@ -47,10 +55,13 @@ class tabBar extends StatelessWidget {
               ],
             ),
             title: const Text('Connected T-Shirt'),
+
           ),
+            backgroundColor: Colors.blueGrey,
           body: TabBarView(
             children: [
-              plotsPage(),
+              dataPage(),
+              chartsPage(),
               dashBoardPage(),
               settingsPage(),
             ],
