@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
 class dashBoardPage extends StatefulWidget {
   const dashBoardPage({Key? key}) : super(key: key);
 
@@ -10,16 +11,96 @@ class dashBoardPage extends StatefulWidget {
 }
 
 class _dashBoardPageState extends State<dashBoardPage> {
+  var cardStyle = TextStyle(fontFamily: "Montserrat Regluar", fontSize: 18, color: Colors.black);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: MaterialButton(
-          color: Colors.white60,
-          onPressed: (){},
-          child: Text("Dashboard"),
+      body: Stack(
+        children: <Widget>[
+          Container(
 
-        ),
+      ),
+          Expanded(
+          child: GridView.count(
+              mainAxisSpacing: 3,
+              crossAxisSpacing: 3,
+              primary: false,
+              children: <Widget>[
+                Card(
+
+                  shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8)
+          ),
+                  elevation: 4,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+
+                      Icon(Icons.query_stats, size: 85.0,),
+                      Text("65 BPM ",style: cardStyle,),
+
+
+
+                    ],
+                  ),
+
+                ),
+                Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)
+                  ),
+                  elevation: 4,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+
+                      Icon(Icons.thermostat, size: 85.0,),
+                      Text("26°C",style: cardStyle,),
+
+
+                    ],
+                  ),
+
+                ),
+                Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)
+                  ),
+                  elevation: 4,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+
+                      Icon(Icons.ac_unit, size: 85.0,),
+                      Text("17% of Humidity",style: cardStyle,),
+
+
+                    ],
+                  ),
+
+                ),
+                Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)
+                  ),
+                  elevation: 4,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+
+                      Icon(Icons.list, size: 85.0,),
+                      Text("All Data",style: cardStyle,),
+
+
+                    ],
+                  ),
+
+                ),
+              ],
+              crossAxisCount: 2
+          ),
+    ),
+        ],
       ),
     );
   }
