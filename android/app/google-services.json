@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "929385443763",
-    "project_id": "flutterconnectedtshirt",
-    "storage_bucket": "flutterconnectedtshirt.appspot.com"
+    "project_number": "391746278024",
+    "firebase_url": "https://connectedtshirt-default-rtdb.firebaseio.com",
+    "project_id": "connectedtshirt",
+    "storage_bucket": "connectedtshirt.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:929385443763:android:00d11ee53fd1d22c3f1bc6",
+        "mobilesdk_app_id": "1:391746278024:android:03ac7de0b36ed73097453d",
         "android_client_info": {
           "package_name": "com.hevs.flutter.projet.projet_connected_t_shirt"
         }
       },
       "oauth_client": [
         {
-          "client_id": "929385443763-gu2ectta1vpc8bquupt1kdkvk4k71uv2.apps.googleusercontent.com",
+          "client_id": "391746278024-ruj91ujg8e7g3mjklu5ei6bjsreutla0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAPmuBB9jwnXdnM_28Rt-k4h9vQk7w7ncI"
+          "current_key": "AIzaSyCmtBu5zw8sLz1qvcZgf1-6AW1R5-h6ePk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "929385443763-gu2ectta1vpc8bquupt1kdkvk4k71uv2.apps.googleusercontent.com",
+              "client_id": "391746278024-ruj91ujg8e7g3mjklu5ei6bjsreutla0.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
