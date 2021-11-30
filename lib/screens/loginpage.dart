@@ -69,8 +69,10 @@ class LoginPageState extends State<LoginPage> {
               },
 
               decoration: InputDecoration(hintText: "Enter Email"),
+
             ),
             TextField(
+
               enableSuggestions: false,
               autocorrect: false,
               onChanged: (value){
