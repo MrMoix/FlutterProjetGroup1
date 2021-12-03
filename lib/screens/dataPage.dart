@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:projet_connected_t_shirt/data/myData.dart';
 
 class dataPage extends StatefulWidget {
   const dataPage({Key? key}) : super(key: key);
@@ -12,15 +13,41 @@ class dataPage extends StatefulWidget {
 }
 
 class _dataPageState extends State<dataPage> {
-  final Future<FirebaseApp> _future = Firebase.initializeApp();
-  final databaseRef = FirebaseDatabase.instance.reference();
+  List<myData> allData = [];
 
-  void printFirebase() {
-    databaseRef.once().then((DataSnapshot snapshot) {
-      print('Data : ${snapshot.value}');
+  @override
+  void initState() {
+    DatabaseReference ref = FirebaseDatabase.instance.reference();
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    final uid = user!.uid;
+    ref
+        .child('Customer')
+        //This child has to be the connected user ID
+        .child(uid)
+        .child("tshirt")
+        .once()
+        .then((DataSnapshot snap) {
+      //I have to count the children element here :
+      var keys = snap.value;
+      var data = snap.value;
+      allData.clear();
+
+      //The for loop has to loop until the table size
+      for (var i = 0; i < 266; i++) {
+        myData d = new myData(
+          data[i]['time'],
+          data[i]['frequence'],
+          data[i]['temperature'],
+          data[i]['humidity'],
+        );
+        allData.add(d);
+      }
+      setState(() {
+        print('Length : ${allData.length}');
+      });
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -32,123 +59,35 @@ class _dataPageState extends State<dataPage> {
       ),
     );
   }
-}
 
+  DataTable _createDataTable() {
+    return DataTable(
+      columns: _createColumns(),
+      rows: _createRows(),
+      dividerThickness: 3,
+      columnSpacing: 4.5,
+      dataRowHeight: 55,
+      showBottomBorder: true,
+    );
+  }
 
-DataTable _createDataTable() {
-  return DataTable(
-    columns: _createColumns(),
-    rows: _createRows(),
-    dividerThickness: 3,
-    columnSpacing: 4.5,
-    dataRowHeight: 55,
-    showBottomBorder: true,
-  );
-}
+  List<DataColumn> _createColumns() {
+    return [
+      DataColumn(label: Text('Time')),
+      DataColumn(label: Text('Frequence')),
+      DataColumn(label: Text('Temperature')),
+      DataColumn(label: Text('Humidity'))
+    ];
+  }
 
-List<DataColumn> _createColumns() {
-  return [
-    DataColumn(label: Text('Time')),
-    DataColumn(label: Text('Frequence')),
-    DataColumn(label: Text('Temperature')),
-    DataColumn(label: Text('Humidity'))
-  ];
-}
-
-List<DataRow> _createRows() {
-  List<Map> _datatshirt = [
-    {
-      "Time": "1:01:01",
-      "Frequence": "45",
-      "temperature": "28",
-      "humidity": "17"
-    },
-    {
-      "Time": "2:01:01",
-      "Frequence": "46",
-      "temperature": "29",
-      "humidity": "17"
-    },
-    {
-      "Time": "3:01:01",
-      "Frequence": "47",
-      "temperature": "30",
-      "humidity": "17"
-    },
-    {
-      "Time": "4:01:01",
-      "Frequence": "48",
-      "temperature": "31",
-      "humidity": "17"
-    },
-    {
-      "Time": "5:01:01",
-      "Frequence": "49",
-      "temperature": "32",
-      "humidity": "17"
-    },
-    {
-      "Time": "6:01:01",
-      "Frequence": "50",
-      "temperature": "33",
-      "humidity": "17"
-    },
-    {
-      "Time": "3:01:01",
-      "Frequence": "47",
-      "temperature": "30",
-      "humidity": "17"
-    },
-    {
-      "Time": "4:01:01",
-      "Frequence": "48",
-      "temperature": "31",
-      "humidity": "17"
-    },
-    {
-      "Time": "5:01:01",
-      "Frequence": "49",
-      "temperature": "32",
-      "humidity": "17"
-    },
-    {
-      "Time": "6:01:01",
-      "Frequence": "50",
-      "temperature": "33",
-      "humidity": "17"
-    },
-    {
-      "Time": "3:01:01",
-      "Frequence": "47",
-      "temperature": "30",
-      "humidity": "17"
-    },
-    {
-      "Time": "4:01:01",
-      "Frequence": "48",
-      "temperature": "31",
-      "humidity": "17"
-    },
-    {
-      "Time": "5:01:01",
-      "Frequence": "49",
-      "temperature": "32",
-      "humidity": "17"
-    },
-    {
-      "Time": "6:01:01",
-      "Frequence": "50",
-      "temperature": "33",
-      "humidity": "17"
-    },
-  ];
-  return _datatshirt
-      .map((book) => DataRow(cells: [
-
-            DataCell(Text(book['Time'])),
-            DataCell(Text(book['Frequence'])),
-            DataCell(Text(book['temperature'])),
-            DataCell(Text(book['humidity']))
-          ]))
-      .toList();
+  List<DataRow> _createRows() {
+    return allData
+        .map((book) => DataRow(cells: [
+              DataCell(Text(book.time)),
+              DataCell(Text(book.frequence)),
+              DataCell(Text(book.temperature)),
+              DataCell(Text(book.humidity))
+            ]))
+        .toList();
+  }
 }
