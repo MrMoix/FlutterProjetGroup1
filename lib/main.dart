@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
+import 'package:projet_connected_t_shirt/screens/ShowDataPage.dart';
 import 'package:projet_connected_t_shirt/screens/chartsPage.dart';
 import 'package:projet_connected_t_shirt/screens/dashBoardPage.dart';
 import 'package:projet_connected_t_shirt/screens/homepage.dart';
@@ -60,7 +61,7 @@ class tabBar extends StatelessWidget {
             backgroundColor: Colors.blueGrey,
           body: TabBarView(
             children: [
-              dataPage(),
+              ShowDataPage(),
               chartsPage(),
               dashBoardPage(),
               settingsPage(),
