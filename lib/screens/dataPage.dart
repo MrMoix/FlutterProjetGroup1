@@ -29,13 +29,11 @@ class _dataPageState extends State<dataPage> {
         .once()
         .then((DataSnapshot snap) {
       //I have to count the children element here :
-      var data = snap.value;
-      
-      print('DATA : ${snap}');
+      List<dynamic> data = snap.value;
       allData.clear();
 
       //The for loop has to loop until the table size
-      for (var i = 0; i < 266; i++) {
+      for (var i = 0; i < data.length; i++) {
         myData d = new myData(
           data[i]['time'],
           data[i]['frequence'],
@@ -83,11 +81,11 @@ class _dataPageState extends State<dataPage> {
 
   List<DataRow> _createRows() {
     return allData
-        .map((book) => DataRow(cells: [
-              DataCell(Text(book.time)),
-              DataCell(Text(book.frequence)),
-              DataCell(Text(book.temperature)),
-              DataCell(Text(book.humidity))
+        .map((value) => DataRow(cells: [
+              DataCell(Text(value.time)),
+              DataCell(Text(value.frequence)),
+              DataCell(Text(value.temperature)),
+              DataCell(Text(value.humidity))
             ]))
         .toList();
   }
