@@ -29,8 +29,9 @@ class _dataPageState extends State<dataPage> {
         .once()
         .then((DataSnapshot snap) {
       //I have to count the children element here :
-      var keys = snap.value;
       var data = snap.value;
+      
+      print('DATA : ${snap}');
       allData.clear();
 
       //The for loop has to loop until the table size
