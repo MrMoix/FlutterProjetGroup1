@@ -42,7 +42,6 @@ class _dataPageState extends State<dataPage> {
         allData.add(d);
       }
       setState(() {
-        print("Data update");
       });
     });
   }

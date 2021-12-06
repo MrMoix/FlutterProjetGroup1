@@ -46,7 +46,6 @@ class _dashBoardPageState extends State<dashBoardPage> {
         allData.add(d);
       }
       setState(() {
-        print("Data update");
       });
     });
   }
@@ -131,11 +130,11 @@ class _dashBoardPageState extends State<dashBoardPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Icon(
-                              Icons.list,
+                              Icons.timer,
                               size: 85.0,
                             ),
                             Text(
-                              "All Data",
+                              "${(allData.length != 0) ? allData[allData.length - 1].time : "No data"}",
                               style: cardStyle,
                             ),
                           ],
