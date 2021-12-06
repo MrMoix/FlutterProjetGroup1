@@ -1,5 +1,5 @@
 class myData {
-  String name, message, profession;
+  String time, frequence, temperature, humidity;
 
-  myData(this.name, this.message, this.profession);
+  myData(this.time, this.frequence, this.temperature, this.humidity);
 }
