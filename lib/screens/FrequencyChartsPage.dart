@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:projet_connected_t_shirt/data/myData.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:intl/intl.dart';
+
 class Frequency extends StatefulWidget {
   const Frequency({Key? key}) : super(key: key);
   @override
@@ -47,14 +49,58 @@ class _FrequencyState extends State<Frequency> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SfCartesianChart(
-        series: <ChartSeries>[
-          LineSeries<myData, num>(
-              dataSource: allData,
-              xValueMapper: (myData dataRow, _) => DateTime(2021,1,1, int.parse(dataRow.time.substring(0, 2)), int.parse(dataRow.time.substring(4, 5))).millisecondsSinceEpoch,
-              yValueMapper: (myData dataRow, _) => double.parse(dataRow.frequence))
-        ],
-      ),
+        body:
+        ListView(
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                Container(
+                  height: 250,
+                  width: 400,
+                  child:SfCartesianChart(
+
+                    title: ChartTitle(text: 'Heartbeat History Hourly'),
+                    legend: Legend(isVisible: false),
+                    series: <ChartSeries>[
+                      LineSeries<myData, num>(
+
+                          dataSource: allData,
+                          xValueMapper: (myData dataRow, _) => DateTime(2021,1,1, int.parse(dataRow.time.substring(0, 2)), int.parse(dataRow.time.substring(3, 4))).millisecondsSinceEpoch,
+                          yValueMapper: (myData dataRow, _) => double.parse(dataRow.frequence),
+                          dataLabelSettings: DataLabelSettings(isVisible: true)
+                      )
+                    ],
+                    primaryXAxis: CategoryAxis(isVisible: true),
+                    primaryYAxis: NumericAxis(numberFormat: NumberFormat("###")),
+                  ),
+                ),
+                Container(
+                  height: 250,
+                  width: 400,
+                  child:SfCartesianChart(
+
+                    title: ChartTitle(text: 'Heartbeat Max/Min Daily'),
+                    legend: Legend(isVisible: false),
+                    series: <ChartSeries>[
+                      LineSeries<myData, num>(
+
+                          dataSource: allData,
+                          xValueMapper: (myData dataRow, _) => DateTime(2021,1,1, int.parse(dataRow.time.substring(0, 2)), int.parse(dataRow.time.substring(3, 4))).millisecondsSinceEpoch,
+                          yValueMapper: (myData dataRow, _) => double.parse(dataRow.frequence),
+                          dataLabelSettings: DataLabelSettings(isVisible: true)
+                      )
+                    ],
+                    primaryXAxis: CategoryAxis(isVisible: true),
+                    primaryYAxis: NumericAxis(numberFormat: NumberFormat("###")),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        )
     );
   }
+
 }
+
+
