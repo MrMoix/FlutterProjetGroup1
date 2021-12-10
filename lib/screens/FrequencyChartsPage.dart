@@ -62,15 +62,14 @@ class _FrequencyState extends State<Frequency> {
                     title: ChartTitle(text: 'Heartbeat History Hourly'),
                     legend: Legend(isVisible: false),
                     series: <ChartSeries>[
-                      LineSeries<myData, num>(
+                      LineSeries<myData, DateTime>(
 
                           dataSource: allData,
-                          xValueMapper: (myData dataRow, _) => DateTime(2021,1,1, int.parse(dataRow.time.substring(0, 2)), int.parse(dataRow.time.substring(3, 4))).millisecondsSinceEpoch,
-                          yValueMapper: (myData dataRow, _) => double.parse(dataRow.frequence),
-                          dataLabelSettings: DataLabelSettings(isVisible: true)
+                          xValueMapper: (myData dataRow, _) => DateTime(2021,1,1, int.parse(dataRow.time.substring(0, 2)), int.parse(dataRow.time.substring(3, 4))),
+                          yValueMapper: (myData dataRow, _) => double.parse(dataRow.frequence)
                       )
                     ],
-                    primaryXAxis: CategoryAxis(isVisible: true),
+                    primaryXAxis: DateTimeAxis(isVisible: true),
                     primaryYAxis: NumericAxis(numberFormat: NumberFormat("###")),
                   ),
                 ),
@@ -82,15 +81,14 @@ class _FrequencyState extends State<Frequency> {
                     title: ChartTitle(text: 'Heartbeat Max/Min Daily'),
                     legend: Legend(isVisible: false),
                     series: <ChartSeries>[
-                      LineSeries<myData, num>(
+                      LineSeries<myData, DateTime>(
 
                           dataSource: allData,
-                          xValueMapper: (myData dataRow, _) => DateTime(2021,1,1, int.parse(dataRow.time.substring(0, 2)), int.parse(dataRow.time.substring(3, 4))).millisecondsSinceEpoch,
-                          yValueMapper: (myData dataRow, _) => double.parse(dataRow.frequence),
-                          dataLabelSettings: DataLabelSettings(isVisible: true)
+                          xValueMapper: (myData dataRow, _) => DateTime(2021,1,1, int.parse(dataRow.time.substring(0, 2)), int.parse(dataRow.time.substring(3, 4))),
+                          yValueMapper: (myData dataRow, _) => double.parse(dataRow.frequence)
                       )
                     ],
-                    primaryXAxis: CategoryAxis(isVisible: true),
+                    primaryXAxis: DateTimeAxis(isVisible: true),
                     primaryYAxis: NumericAxis(numberFormat: NumberFormat("###")),
                   ),
                 ),
