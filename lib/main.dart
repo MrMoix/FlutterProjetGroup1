@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:projet_connected_t_shirt/screens/chartsPage.dart';
 import 'package:projet_connected_t_shirt/screens/dashBoardPage.dart';
+import 'package:projet_connected_t_shirt/screens/getData.dart';
 import 'package:projet_connected_t_shirt/screens/loginpage.dart';
 import 'package:projet_connected_t_shirt/screens/dataPage.dart';
 import 'package:projet_connected_t_shirt/screens/settingsPage.dart';
@@ -55,12 +56,12 @@ class tabBar extends StatelessWidget {
             title: const Text('Connected T-Shirt'),
 
           ),
-            backgroundColor: Colors.blueGrey,
+          backgroundColor: Colors.blueGrey,
           body: TabBarView(
             children: [
               dataPage(),
               chartsPage(),
-              dashBoardPage(),
+              getData(),
               settingsPage(),
             ],
           ),

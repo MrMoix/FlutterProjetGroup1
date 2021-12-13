@@ -28,23 +28,22 @@ class _dashBoardPageState extends State<dashBoardPage> {
         .child('Customer')
         //This child has to be the connected user ID
         .child(uid)
-        .child("tshirt")
-        .once()
+    .once()
         .then((DataSnapshot snap) {
       //I have to count the children element here :
-      List<dynamic> data = snap.value;
+      Map userData = snap.value;
       allData.clear();
-
-      //The for loop has to loop until the table size
-      for (var i = 0; i < data.length; i++) {
-        myData d = new myData(
-          data[i]['time'],
-          data[i]['frequence'],
-          data[i]['temperature'],
-          data[i]['humidity'],
-        );
-        allData.add(d);
-      }
+      userData.forEach((key, value) {
+        for(var i = 0; i < value.length; i++){
+          myData d = new myData(
+            value.elementAt(i)['time'],
+            value.elementAt(i)['frequency'],
+            value.elementAt(i)['temperature'],
+            value.elementAt(i)['humidity'],
+          );
+          allData.add(d);
+        }
+      });
       setState(() {
       });
     });
