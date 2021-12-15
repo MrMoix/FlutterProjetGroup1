@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:projet_connected_t_shirt/data/myData.dart';
 
 class dataPage extends StatefulWidget {
@@ -24,24 +27,42 @@ class _dataPageState extends State<dataPage> {
         .child('Customer')
         //This child has to be the connected user ID
         .child(uid)
-        .child("tshirt")
         .once()
         .then((DataSnapshot snap) {
       //I have to count the children element here :
-      List<dynamic> data = snap.value;
-      allData.clear();
-
-      //The for loop has to loop until the table size
-      for (var i = 0; i < data.length; i++) {
-        myData d = new myData(
-          data[i]['time'],
-          data[i]['frequence'],
-          data[i]['temperature'],
-          data[i]['humidity'],
-        );
-        allData.add(d);
-      }
+      Map activityData = snap.value;
+      var userKey = snap.key;
+      print("test1 : ${activityData}");
+      print("test2 : ${userKey}");
+      activityData.forEach((key, value)  {
+        ref
+            .child('Customer')
+        //This child has to be the connected user ID
+            .child(userKey!).child(key)
+            .once()
+            .then((DataSnapshot snap) {
+          //I have to count the children element here :
+          Map timeData = snap.value;
+          var timKey = snap.key;
+          print("test3 : ${timeData}");
+          print("test4 : ${timKey}");
+          var cpt = 0;
+          timeData.forEach((key, value)  {
+            print("key ${key}");
+            print("value ${cpt} equals ${value}");
+            cpt++;
+            myData test = myData.fromJson(value);
+            allData.add(test);
+          });
+          setState(() {
+            print("user data is ${activityData}");
+            print("All data is ${allData[0].frequence}");
+          });
+        });
+      });
       setState(() {
+        print("user data is ${activityData}");
+        print("All data is ${allData}");
       });
     });
   }

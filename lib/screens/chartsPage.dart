@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:projet_connected_t_shirt/screens/FrequencyChartsPage.dart';
 import 'package:projet_connected_t_shirt/screens/HumidityChartsPage.dart';
 import 'package:projet_connected_t_shirt/screens/TemperatureChartsPage.dart';
-import 'package:projet_connected_t_shirt/screens/dashBoardPage.dart';
-import 'package:projet_connected_t_shirt/screens/dataPage.dart';
-import 'package:projet_connected_t_shirt/screens/settingsPage.dart';
+
 
 class chartsPage extends StatefulWidget {
   const chartsPage({Key? key}) : super(key: key);
