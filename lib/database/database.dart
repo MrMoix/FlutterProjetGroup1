@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -24,7 +26,7 @@ class Database
   }
 
   //Methode that send the data to firebase
-  void sendData(myData data) {
-    _messagesRef.push().set(data.toJson(myTimeStamp.seconds.toString()));
+  void sendData(myData data) async{
+    await _messagesRef.push().set(data.toJson());
   }
 }

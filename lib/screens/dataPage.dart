@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:projet_connected_t_shirt/data/myData.dart';
 
 class dataPage extends StatefulWidget {
@@ -27,21 +30,39 @@ class _dataPageState extends State<dataPage> {
         .once()
         .then((DataSnapshot snap) {
       //I have to count the children element here :
-      Map userData = snap.value;
-      allData.clear();
-      userData.forEach((key, value) {
-        for (var i = 0; i < value.length; i++) {
-          myData d = new myData(
-            value[i]['time'],
-            value[i]['frequence'],
-            value[i]['temperature'],
-            value[i]['humidity'],
-          );
-          allData.add(d);
-        }
+      Map activityData = snap.value;
+      var userKey = snap.key;
+      print("test1 : ${activityData}");
+      print("test2 : ${userKey}");
+      activityData.forEach((key, value)  {
+        ref
+            .child('Customer')
+        //This child has to be the connected user ID
+            .child(userKey!).child(key)
+            .once()
+            .then((DataSnapshot snap) {
+          //I have to count the children element here :
+          Map timeData = snap.value;
+          var timKey = snap.key;
+          print("test3 : ${timeData}");
+          print("test4 : ${timKey}");
+          var cpt = 0;
+          timeData.forEach((key, value)  {
+            print("key ${key}");
+            print("value ${cpt} equals ${value}");
+            cpt++;
+            myData test = myData.fromJson(value);
+            allData.add(test);
+          });
+          setState(() {
+            print("user data is ${activityData}");
+            print("All data is ${allData[0].frequence}");
+          });
+        });
       });
       setState(() {
-        print("user data is ${userData}");
+        print("user data is ${activityData}");
+        print("All data is ${allData}");
       });
     });
   }

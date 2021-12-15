@@ -34,7 +34,7 @@ class _getData extends State<getData> {
   void getData() async {
 
     //Connect to the server IP
-    Response response = await get(Uri.parse('http://192.168.4.2'));
+    Response response = await get(Uri.parse('https://tshirtserver-group1.herokuapp.com/'));
 
     //Store the response body on the list with a split function
     temp = response.body.split(" ");
@@ -56,7 +56,6 @@ class _getData extends State<getData> {
 
     //We send the data to firebase event we didn't have the wifi
     database.sendData(myTemp);
-
 
     //We set the state of the label that show the data in real time to the application
     setState(() {
