@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:projet_connected_t_shirt/screens/chartsPage.dart';
-import 'package:projet_connected_t_shirt/screens/dashBoardPage.dart';
 import 'package:projet_connected_t_shirt/screens/getData.dart';
 import 'package:projet_connected_t_shirt/screens/loginpage.dart';
 import 'package:projet_connected_t_shirt/screens/dataPage.dart';
@@ -98,11 +97,7 @@ class LandingPage extends StatelessWidget {
                     return LoginPage();
                   } else {
                     return tabBar();
-                    return const Scaffold(
-                      body: Center(
-                        child: Text("Checking Auth"),
-                      ),
-                    );
+
                   }
                 }
                 return const Scaffold(

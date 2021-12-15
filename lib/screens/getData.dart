@@ -4,6 +4,8 @@ import 'package:http/http.dart';
 import 'package:projet_connected_t_shirt/data/myData.dart';
 import 'package:projet_connected_t_shirt/database/database.dart';
 
+import 'HumidityChartsPage.dart';
+
 
 class getData extends StatefulWidget {
   const getData({Key? key}) : super(key: key);
@@ -13,9 +15,15 @@ class getData extends StatefulWidget {
 }
 
 class _getData extends State<getData> {
+  var cardStyle = TextStyle(
+      fontFamily: "Montserrat Regluar", fontSize: 18, color: Colors.black);
+
 
   //Variable that get all the data from the t-shirt
-  String _data = "";
+  String _dataHumidity = "";
+  String _dataTemperature = "";
+  String _dataTime = "";
+  String _dataFrequence = "";
 
   //List that will stored one line of data per seconde
   late List<String> temp;
@@ -59,9 +67,10 @@ class _getData extends State<getData> {
 
     //We set the state of the label that show the data in real time to the application
     setState(() {
-
-      _data = "Data : "+ time.toString()+ "  "+ frequence.toString()
-          +"  "+ temperature.toString()+"  "+ humidity.toString();
+      _dataFrequence = frequence.toString();
+      _dataHumidity = humidity.toString();
+      _dataTemperature = temperature.toString();
+      _dataTime = time.toString();
 
     });
 
@@ -75,7 +84,7 @@ class _getData extends State<getData> {
 
 
     //We increment a timer every 2 secondes the get the data and we put the get data methode inside the timer
-    Timer mytimer = Timer.periodic(Duration(seconds: 2), (timer) {
+    Timer mytimer = Timer.periodic(Duration(seconds: 5), (timer) {
 
       //Methode that get all data
       getData();
@@ -94,22 +103,99 @@ class _getData extends State<getData> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You can see de t-shirt data in real time',
-            ),
-            Text(
-              '$_data',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
+      body: Stack(
+        children: <Widget>[
+          Container(
+            child: GridView.count(
+                mainAxisSpacing: 3,
+                crossAxisSpacing: 3,
+                primary: false,
+                children: <Widget>[
+                  Card(
+                    color: (_dataFrequence.length!=0) ?(int.parse(_dataFrequence)>100) ? Colors.red : Colors.lightGreen : Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                    elevation: 4,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          Icons.query_stats,
+                          size: 85.0,
+                        ),
+                        Text(
+                          "${(_dataFrequence.length!=0) ? "$_dataFrequence BPM": "Not connected"}",
+                          style: cardStyle,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Card(
+                    color: (_dataTemperature.length!=0) ?(int.parse(_dataTemperature)>0) ? Colors.orangeAccent : Colors.amber : Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                    elevation: 4,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          Icons.thermostat,
+                          size: 85.0,
+                        ),
+                        Text(
+                          "${(_dataTemperature.length!=0) ? "$_dataTemperature °C": "Not connected"}",
+                          style: cardStyle,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Card(
+                    color: (_dataHumidity.length!=0) ?(int.parse(_dataHumidity)>50) ? Colors.red : Colors.blue : Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                    elevation: 4,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          Icons.ac_unit,
+                          size: 85.0,
+                        ),
+                        Text(
+                          "${(_dataHumidity.length!=0) ? "$_dataHumidity % of Humidity" : "Not connected"}",
+                          style: cardStyle,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                    elevation: 4,
+                    child: new InkWell(
+                      onTap: () => Humidity(),
+                      child: new Container(
+                        color: Colors.white70,
+                        child: new Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(
+                              Icons.timer,
+                              size: 85.0,
+                            ),
+                            Text(
+                              "${(_dataTime.length!=0) ? _dataTime : "Not connected"}",
+                              style: cardStyle,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+                crossAxisCount: 2),
+          ),
+        ],
       ),
     );
   }
