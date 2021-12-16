@@ -12,17 +12,16 @@ import '../main.dart';
 class Database
 {
   late final DatabaseReference _messagesRef;
-  Timestamp myTimeStamp = Timestamp.fromDate(DateTime.now());
   Database(){
     //DateTime
     DateTime currentPhoneDate = DateTime.now();
-    myTimeStamp = Timestamp.fromDate(currentPhoneDate); //To TimeStamp
+    final myTimeStamp = currentPhoneDate.millisecondsSinceEpoch; //To TimeStamp
     final FirebaseAuth auth = FirebaseAuth.instance;
     final User? user = auth.currentUser;
     final uid = user!.uid;
     _messagesRef =
-    FirebaseDatabase.instance.reference().child('Customer').child(uid).child(myTimeStamp.seconds.toString());
-    print('Create timestamp  ${myTimeStamp.seconds.toString()}');
+    FirebaseDatabase.instance.reference().child('Customer').child(uid).child(myTimeStamp.toString());
+    print('Create timestamp  ${myTimeStamp}');
   }
 
   //Methode that send the data to firebase

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,6 +15,8 @@ class Frequency extends StatefulWidget {
 
 class _FrequencyState extends State<Frequency> {
   List<myData> allData = [];
+  late int year, month, day;
+
   @override
   void initState() {
     DatabaseReference ref = FirebaseDatabase.instance.reference();
@@ -24,22 +27,22 @@ class _FrequencyState extends State<Frequency> {
         .child('Customer')
     //This child has to be the connected user ID
         .child(uid)
-        .child("tshirt")
+        .child("1639645777327")
         .once()
         .then((DataSnapshot snap) {
       //I have to count the children element here :
-      List<dynamic> data = snap.value;
-      allData.clear();
-      //The for loop has to loop until the table size
-      for (var i = 0; i < data.length; i++) {
-        myData d = new myData(
-          data[i]['time'],
-          data[i]['frequence'],
-          data[i]['temperature'],
-          data[i]['humidity'],
-        );
-        allData.add(d);
-      }
+      Map userData = snap.value;
+      var userKey = snap.key;
+      final DateTime date1 = DateTime.fromMillisecondsSinceEpoch(int.parse(userKey!));
+      year = date1.year;
+      month = date1.month;
+      day = date1.day;
+      print("le jour est ${year} ${month} ${day}");
+      userData.forEach((key, value)  {
+        print("value : ${value}");
+        myData data = myData.fromJson(value);
+        allData.add(data);
+      });
       setState(() {
         print('Length : ${allData.length}');
       });
@@ -63,9 +66,8 @@ class _FrequencyState extends State<Frequency> {
                     legend: Legend(isVisible: false),
                     series: <ChartSeries>[
                       LineSeries<myData, DateTime>(
-
                           dataSource: allData,
-                          xValueMapper: (myData dataRow, _) => DateTime(2021,1,1, int.parse(dataRow.time.substring(0, 2)), int.parse(dataRow.time.substring(3, 4))),
+                          xValueMapper: (myData dataRow, _) => DateTime(year,month,day, int.parse(dataRow.time.substring(0, 2)), int.parse(dataRow.time.substring(3, 5)), int.parse(dataRow.time.substring(6, 8))),
                           yValueMapper: (myData dataRow, _) => double.parse(dataRow.frequence)
                       )
                     ],
@@ -84,7 +86,7 @@ class _FrequencyState extends State<Frequency> {
                       LineSeries<myData, DateTime>(
 
                           dataSource: allData,
-                          xValueMapper: (myData dataRow, _) => DateTime(2021,1,1, int.parse(dataRow.time.substring(0, 2)), int.parse(dataRow.time.substring(3, 4))),
+                          xValueMapper: (myData dataRow, _) => DateTime(year,month,day, int.parse(dataRow.time.substring(0, 2)), int.parse(dataRow.time.substring(3, 5)), int.parse(dataRow.time.substring(6, 8))),
                           yValueMapper: (myData dataRow, _) => double.parse(dataRow.frequence)
                       )
                     ],
