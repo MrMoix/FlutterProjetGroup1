@@ -30,11 +30,9 @@ class _dataPageState extends State<dataPage> {
         .once()
         .then((DataSnapshot snap) {
       //I have to count the children element here :
-      Map activityData = snap.value;
+      Map userData = snap.value;
       var userKey = snap.key;
-      print("test1 : ${activityData}");
-      print("test2 : ${userKey}");
-      activityData.forEach((key, value)  {
+      userData.forEach((key, value)  {
         ref
             .child('Customer')
         //This child has to be the connected user ID
@@ -42,27 +40,18 @@ class _dataPageState extends State<dataPage> {
             .once()
             .then((DataSnapshot snap) {
           //I have to count the children element here :
-          Map timeData = snap.value;
-          var timKey = snap.key;
-          print("test3 : ${timeData}");
-          print("test4 : ${timKey}");
-          var cpt = 0;
-          timeData.forEach((key, value)  {
-            print("key ${key}");
-            print("value ${cpt} equals ${value}");
-            cpt++;
+          Map activityData = snap.value;
+          activityData.forEach((key, value)  {
             myData test = myData.fromJson(value);
             allData.add(test);
           });
           setState(() {
-            print("user data is ${activityData}");
-            print("All data is ${allData[0].frequence}");
+
           });
         });
       });
       setState(() {
-        print("user data is ${activityData}");
-        print("All data is ${allData}");
+
       });
     });
   }

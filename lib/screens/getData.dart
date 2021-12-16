@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:projet_connected_t_shirt/data/myData.dart';
 import 'package:projet_connected_t_shirt/database/database.dart';
-
+import 'package:intl/intl.dart';
 import 'HumidityChartsPage.dart';
 
 
@@ -38,6 +38,7 @@ class _getData extends State<getData> {
   Database database = new Database();
 
 
+
   //Methode that will connect the application with the web server in this ip (192.168.4.2) and get the data
   void getData() async {
 
@@ -49,17 +50,22 @@ class _getData extends State<getData> {
 
 
     //Increment the variables to those different variables
-    time = temp[0];
     frequence = temp[1];
     temperature = temp[2];
     humidity = temp[3];
 
+    DateTime currentPhoneDate = DateTime.now();
+    final DateFormat formatter = DateFormat('hh:mm:ss');
+    final String formattedTime = formatter.format(currentPhoneDate);
+
+    print("NEWTIME ${formattedTime}");
+
     //Print on the console the data
-    print("Data : "+ time.toString()+ "  "+ frequence.toString()
+    print("Data : "+ formattedTime + "  "+ frequence.toString()
         +"  "+ temperature.toString()+"  "+ humidity.toString());
 
     //Create object to send the data
-    myData myTemp = myData(time, frequence, temperature, humidity);
+    myData myTemp = myData(formattedTime, frequence, temperature, humidity);
 
 
     //We send the data to firebase event we didn't have the wifi
@@ -70,10 +76,8 @@ class _getData extends State<getData> {
       _dataFrequence = frequence.toString();
       _dataHumidity = humidity.toString();
       _dataTemperature = temperature.toString();
-      _dataTime = time.toString();
-
+      _dataTime = formattedTime.toString();
     });
-
   }
 
   //InitState methode that launch the code when the application in starting
