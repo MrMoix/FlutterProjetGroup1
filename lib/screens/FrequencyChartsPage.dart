@@ -16,30 +16,73 @@ class Frequency extends StatefulWidget {
 class _FrequencyState extends State<Frequency> {
   List<myData> allData = [];
   late int year, month, day;
+  String dropdownValue = 'Select activities';
+  List<String> keyData = ['Select activities'];
+
+  late DatabaseReference ref;
+  late final FirebaseAuth auth;
+  late final User user;
+  late final uid;
 
   @override
   void initState() {
-    DatabaseReference ref = FirebaseDatabase.instance.reference();
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final User? user = auth.currentUser;
-    final uid = user!.uid;
+    ref = FirebaseDatabase.instance.reference();
+    auth = FirebaseAuth.instance;
+    User? user = auth.currentUser;
+    uid = user!.uid;
+    _getActivityKeys();
+  }
+
+  void _getActivityKeys() {
+    ref.child('Customer')
+    //This child has to be the connected user ID
+        .child(uid)
+        .once()
+        .then((DataSnapshot snap) {
+      //I have to count the children element here :
+      Map activityData = snap.value;
+      var userKey = snap.key;
+      activityData.forEach((key, value)  {
+        ref
+            .child('Customer')
+        //This child has to be the connected user ID
+            .child(userKey!).child(key)
+            .once()
+            .then((DataSnapshot snap) {
+          //I have to count the children element here :
+          Map timeData = snap.value;
+          var timKey = snap.key;
+          keyData.add(DateTime.fromMillisecondsSinceEpoch(int.parse(timKey!)).toString());
+
+          setState(() {
+            print("All key is ${keyData}");
+          });
+        });
+      });
+      setState(() {
+
+      });
+    });
+  }
+
+  void _getActivityData(String activity){
+
     ref
         .child('Customer')
     //This child has to be the connected user ID
         .child(uid)
-        .child("1639645777327")
+        .child(activity)
         .once()
         .then((DataSnapshot snap) {
       //I have to count the children element here :
       Map userData = snap.value;
       var userKey = snap.key;
-      final DateTime date1 = DateTime.fromMillisecondsSinceEpoch(int.parse(userKey!));
-      year = date1.year;
-      month = date1.month;
-      day = date1.day;
+      final DateTime date = DateTime.fromMillisecondsSinceEpoch(int.parse(userKey!));
+      year = date.year;
+      month = date.month;
+      day = date.day;
       print("le jour est ${year} ${month} ${day}");
       userData.forEach((key, value)  {
-        print("value : ${value}");
         myData data = myData.fromJson(value);
         allData.add(data);
       });
@@ -57,6 +100,34 @@ class _FrequencyState extends State<Frequency> {
           children: <Widget>[
             Column(
               children: <Widget>[
+                Container(
+                  child: DropdownButton<String>(
+                    value: dropdownValue,
+                    icon: const Icon(Icons.arrow_downward),
+                    elevation: 16,
+                    style: const TextStyle(color: Colors.deepPurple),
+                    underline: Container(
+                      height: 2,
+                      color: Colors.deepPurpleAccent,
+                    ),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        allData.clear();
+                        dropdownValue = newValue!;
+                        DateTime date = DateTime.parse(newValue);
+                        var timeStand = date.millisecondsSinceEpoch;
+                        _getActivityData(timeStand.toString());
+                      });
+                    },
+                    items: (keyData.length==0 ? <String>["Select activities"] : keyData)
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  )
+                ),
                 Container(
                   height: 250,
                   width: 400,
@@ -100,7 +171,6 @@ class _FrequencyState extends State<Frequency> {
         )
     );
   }
-
 }
 
 
