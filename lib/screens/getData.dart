@@ -217,6 +217,7 @@ class _getData extends State<getData> {
                   Card(
                     child: new InkWell(
                       onTap: () {
+                        print("Stop");
                         myTimer.cancel();
                       },
                       child: Container(

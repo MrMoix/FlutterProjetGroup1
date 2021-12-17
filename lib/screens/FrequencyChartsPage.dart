@@ -18,6 +18,7 @@ class _FrequencyState extends State<Frequency> {
   late int year, month, day;
   String dropdownValue = 'Select activities';
   List<String> keyData = ['Select activities'];
+  late ZoomPanBehavior _zoomPanBehavior;
 
   late DatabaseReference ref;
   late final FirebaseAuth auth;
@@ -31,6 +32,11 @@ class _FrequencyState extends State<Frequency> {
     User? user = auth.currentUser;
     uid = user!.uid;
     _getActivityKeys();
+    _zoomPanBehavior = ZoomPanBehavior(
+      // Enables pinch zooming
+      enablePinching: true,
+      enablePanning: true,
+    );
   }
 
   void _getActivityKeys() {
@@ -132,7 +138,7 @@ class _FrequencyState extends State<Frequency> {
                   height: 250,
                   width: 400,
                   child:SfCartesianChart(
-
+                    zoomPanBehavior: _zoomPanBehavior,
                     title: ChartTitle(text: 'Heartbeat History Hourly'),
                     legend: Legend(isVisible: false),
                     series: <ChartSeries>[
@@ -145,26 +151,7 @@ class _FrequencyState extends State<Frequency> {
                     primaryXAxis: DateTimeAxis(isVisible: true),
                     primaryYAxis: NumericAxis(numberFormat: NumberFormat("###")),
                   ),
-                ),
-                Container(
-                  height: 250,
-                  width: 400,
-                  child:SfCartesianChart(
-
-                    title: ChartTitle(text: 'Heartbeat Max/Min Daily'),
-                    legend: Legend(isVisible: false),
-                    series: <ChartSeries>[
-                      LineSeries<myData, DateTime>(
-
-                          dataSource: allData,
-                          xValueMapper: (myData dataRow, _) => DateTime(year,month,day, int.parse(dataRow.time.substring(0, 2)), int.parse(dataRow.time.substring(3, 5)), int.parse(dataRow.time.substring(6, 8))),
-                          yValueMapper: (myData dataRow, _) => double.parse(dataRow.frequence)
-                      )
-                    ],
-                    primaryXAxis: DateTimeAxis(isVisible: true),
-                    primaryYAxis: NumericAxis(numberFormat: NumberFormat("###")),
-                  ),
-                ),
+                )
               ],
             ),
           ],
