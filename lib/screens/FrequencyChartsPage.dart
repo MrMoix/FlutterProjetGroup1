@@ -19,6 +19,8 @@ class _FrequencyState extends State<Frequency> {
   String dropdownValue = 'Select activities';
   List<String> keyData = ['Select activities'];
   late ZoomPanBehavior _zoomPanBehavior;
+  int max = 0;
+  int min = 500;
 
   late DatabaseReference ref;
   late final FirebaseAuth auth;
@@ -59,9 +61,8 @@ class _FrequencyState extends State<Frequency> {
           Map timeData = snap.value;
           var timKey = snap.key;
           keyData.add(DateTime.fromMillisecondsSinceEpoch(int.parse(timKey!)).toString());
-
           setState(() {
-            print("All key is ${keyData}");
+              print("All key is ${keyData}");
           });
         });
       });
@@ -92,8 +93,20 @@ class _FrequencyState extends State<Frequency> {
         myData data = myData.fromJson(value);
         allData.add(data);
       });
+      max = 0;
+      min = 500;
+      userData.forEach((key, value) {
+        if(int.parse(value['frequence']) > max){
+          max = int.parse(value['frequence']);
+        }
+        if(int.parse(value['frequence']) < min){
+          min = int.parse(value['frequence']);
+        };
+      });
       setState(() {
         print('Length : ${allData.length}');
+        print("max is ${max}");
+        print("min is ${min}");
       });
     });
   }
