@@ -22,6 +22,9 @@ class _FrequencyState extends State<Frequency> {
   int max = 0;
   int min = 500;
 
+  var cardStyle = TextStyle(
+      fontFamily: "Montserrat Regluar", fontSize: 18, color: Colors.black);
+
   late DatabaseReference ref;
   late final FirebaseAuth auth;
   late final User user;
@@ -42,41 +45,41 @@ class _FrequencyState extends State<Frequency> {
   }
 
   void _getActivityKeys() {
-    ref.child('Customer')
-    //This child has to be the connected user ID
+    ref
+        .child('Customer')
+        //This child has to be the connected user ID
         .child(uid)
         .once()
         .then((DataSnapshot snap) {
       //I have to count the children element here :
       Map activityData = snap.value;
       var userKey = snap.key;
-      activityData.forEach((key, value)  {
+      activityData.forEach((key, value) {
         ref
             .child('Customer')
-        //This child has to be the connected user ID
-            .child(userKey!).child(key)
+            //This child has to be the connected user ID
+            .child(userKey!)
+            .child(key)
             .once()
             .then((DataSnapshot snap) {
           //I have to count the children element here :
           Map timeData = snap.value;
           var timKey = snap.key;
-          keyData.add(DateTime.fromMillisecondsSinceEpoch(int.parse(timKey!)).toString());
+          keyData.add(DateTime.fromMillisecondsSinceEpoch(int.parse(timKey!))
+              .toString());
           setState(() {
-              print("All key is ${keyData}");
+            print("All key is ${keyData}");
           });
         });
       });
-      setState(() {
-
-      });
+      setState(() {});
     });
   }
 
-  void _getActivityData(String activity){
-
+  void _getActivityData(String activity) {
     ref
         .child('Customer')
-    //This child has to be the connected user ID
+        //This child has to be the connected user ID
         .child(uid)
         .child(activity)
         .once()
@@ -84,24 +87,26 @@ class _FrequencyState extends State<Frequency> {
       //I have to count the children element here :
       Map userData = snap.value;
       var userKey = snap.key;
-      final DateTime date = DateTime.fromMillisecondsSinceEpoch(int.parse(userKey!));
+      final DateTime date =
+          DateTime.fromMillisecondsSinceEpoch(int.parse(userKey!));
       year = date.year;
       month = date.month;
       day = date.day;
       print("le jour est ${year} ${month} ${day}");
-      userData.forEach((key, value)  {
+      userData.forEach((key, value) {
         myData data = myData.fromJson(value);
         allData.add(data);
       });
       max = 0;
       min = 500;
       userData.forEach((key, value) {
-        if(int.parse(value['frequence']) > max){
+        if (int.parse(value['frequence']) > max) {
           max = int.parse(value['frequence']);
         }
-        if(int.parse(value['frequence']) < min){
+        if (int.parse(value['frequence']) < min) {
           min = int.parse(value['frequence']);
-        };
+        }
+        ;
       });
       setState(() {
         print('Length : ${allData.length}');
@@ -114,63 +119,119 @@ class _FrequencyState extends State<Frequency> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body:
-        ListView(
+        body: ListView(
+      children: <Widget>[
+        Column(
           children: <Widget>[
-            Column(
-              children: <Widget>[
-                Container(
-                  child: DropdownButton<String>(
-                    value: dropdownValue,
-                    icon: const Icon(Icons.arrow_downward),
-                    elevation: 16,
-                    style: const TextStyle(color: Colors.deepPurple),
-                    underline: Container(
-                      height: 2,
-                      color: Colors.deepPurpleAccent,
-                    ),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        allData.clear();
-                        dropdownValue = newValue!;
-                        DateTime date = DateTime.parse(newValue);
-                        var timeStand = date.millisecondsSinceEpoch;
-                        _getActivityData(timeStand.toString());
-                      });
-                    },
-                    items: (keyData.length==0 ? <String>["Select activities"] : keyData)
-                        .map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  )
-                ),
-                Container(
-                  height: 250,
-                  width: 400,
-                  child:SfCartesianChart(
-                    zoomPanBehavior: _zoomPanBehavior,
-                    title: ChartTitle(text: 'Heartbeat History Hourly'),
-                    legend: Legend(isVisible: false),
-                    series: <ChartSeries>[
-                      LineSeries<myData, DateTime>(
-                          dataSource: allData,
-                          xValueMapper: (myData dataRow, _) => DateTime(year,month,day, int.parse(dataRow.time.substring(0, 2)), int.parse(dataRow.time.substring(3, 5)), int.parse(dataRow.time.substring(6, 8))),
-                          yValueMapper: (myData dataRow, _) => double.parse(dataRow.frequence)
-                      )
-                    ],
-                    primaryXAxis: DateTimeAxis(isVisible: true),
-                    primaryYAxis: NumericAxis(numberFormat: NumberFormat("###")),
-                  ),
-                )
-              ],
-            ),
+            Container(
+                child: DropdownButton<String>(
+              value: dropdownValue,
+              icon: const Icon(Icons.arrow_downward),
+              elevation: 16,
+              style: const TextStyle(color: Colors.deepPurple),
+              underline: Container(
+                height: 2,
+                color: Colors.deepPurpleAccent,
+              ),
+              onChanged: (String? newValue) {
+                setState(() {
+                  allData.clear();
+                  dropdownValue = newValue!;
+                  DateTime date = DateTime.parse(newValue);
+                  var timeStand = date.millisecondsSinceEpoch;
+                  _getActivityData(timeStand.toString());
+                });
+              },
+              items: (keyData.length == 0
+                      ? <String>["Select activities"]
+                      : keyData)
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            )),
+            Container(
+              height: 250,
+              width: 400,
+              child: SfCartesianChart(
+                zoomPanBehavior: _zoomPanBehavior,
+                title: ChartTitle(text: 'Heartbeat activity'),
+                legend: Legend(isVisible: false),
+                series: <ChartSeries>[
+                  LineSeries<myData, DateTime>(
+                      dataSource: allData,
+                      xValueMapper: (myData dataRow, _) => DateTime(
+                          year,
+                          month,
+                          day,
+                          int.parse(dataRow.time.substring(0, 2)),
+                          int.parse(dataRow.time.substring(3, 5)),
+                          int.parse(dataRow.time.substring(6, 8))),
+                      yValueMapper: (myData dataRow, _) =>
+                          double.parse(dataRow.frequence))
+                ],
+                primaryXAxis: DateTimeAxis(isVisible: true, dateFormat : DateFormat("hh:mm:ss")),
+                primaryYAxis: NumericAxis(numberFormat: NumberFormat("###")),
+              ),
+            )
           ],
-        )
-    );
+        ),
+        Container(
+          height: 250,
+          width: 400,
+          child: GridView.count(
+              mainAxisSpacing: 3,
+              crossAxisSpacing: 3,
+              primary: false,
+              children: <Widget>[
+                Card(
+                  child: new InkWell(
+                    onTap: () {},
+                    child: Container(
+                      color: Colors.deepOrange,
+                      child: new Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "Mimimum value : ",
+                            style: cardStyle,
+                          ),
+                          Text(
+                            (min == 500) ? "No activity selected" : "${min} BPM",
+                            style: cardStyle,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Card(
+                  child: new InkWell(
+                    onTap: () {},
+                    child: Container(
+                      color: Colors.deepOrange,
+                      child: new Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "Maximum value : ",
+                            style: cardStyle,
+                          ),
+                          Text(
+                            (max == 0) ? "No activity selected" : "${max} BPM",
+                            style: cardStyle,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+              crossAxisCount: 2),
+        ),
+      ],
+    ));
   }
 }
-
-
