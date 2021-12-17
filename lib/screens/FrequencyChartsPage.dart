@@ -128,10 +128,10 @@ class _FrequencyState extends State<Frequency> {
               value: dropdownValue,
               icon: const Icon(Icons.arrow_downward),
               elevation: 16,
-              style: const TextStyle(color: Colors.deepPurple),
+              style: const TextStyle(color: Colors.black),
               underline: Container(
                 height: 2,
-                color: Colors.deepPurpleAccent,
+                color: Colors.deepOrange,
               ),
               onChanged: (String? newValue) {
                 setState(() {
@@ -187,44 +187,48 @@ class _FrequencyState extends State<Frequency> {
               primary: false,
               children: <Widget>[
                 Card(
+                  color: Colors.deepOrange,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)),
+                  elevation: 4,
                   child: new InkWell(
-                    onTap: () {},
-                    child: Container(
-                      color: Colors.deepOrange,
-                      child: new Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            "Mimimum value : ",
-                            style: cardStyle,
-                          ),
-                          Text(
-                            (min == 500) ? "No activity selected" : "${min} BPM",
-                            style: cardStyle,
-                          ),
-                        ],
-                      ),
+                    onTap: () {
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Mimimum value : ",
+                          style: cardStyle,
+                        ),
+                        Text(
+                          (min == 500) ? "No activity selected" : "${min} BPM",
+                          style: cardStyle,
+                        ),
+                      ],
                     ),
                   ),
                 ),
                 Card(
+                  color: Colors.deepOrange,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)),
+                  elevation: 4,
                   child: new InkWell(
-                    onTap: () {},
-                    child: Container(
-                      color: Colors.deepOrange,
-                      child: new Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            "Maximum value : ",
-                            style: cardStyle,
-                          ),
-                          Text(
-                            (max == 0) ? "No activity selected" : "${max} BPM",
-                            style: cardStyle,
-                          ),
-                        ],
-                      ),
+                    onTap: () {
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Maximum value : ",
+                          style: cardStyle,
+                        ),
+                        Text(
+                          (max == 0) ? "No activity selected" : "${max} BPM",
+                          style: cardStyle,
+                        ),
+                      ],
                     ),
                   ),
                 ),

@@ -5,7 +5,6 @@ import 'package:projet_connected_t_shirt/data/myData.dart';
 import 'package:projet_connected_t_shirt/database/database.dart';
 import 'package:intl/intl.dart';
 
-
 class getData extends StatefulWidget {
   const getData({Key? key}) : super(key: key);
 
@@ -18,7 +17,6 @@ class _getData extends State<getData> {
       fontFamily: "Montserrat Regluar", fontSize: 18, color: Colors.black);
 
   late Timer myTimer;
-
 
   //Variable that get all the data from the t-shirt
   String _dataHumidity = "";
@@ -35,7 +33,7 @@ class _getData extends State<getData> {
   var temperature;
   var humidity;
 
-  void startGetttingData(){
+  void startGetttingData() {
     Database database = new Database();
     myTimer = Timer.periodic(Duration(seconds: 5), (timer) {
       //Methode that get all data
@@ -45,13 +43,12 @@ class _getData extends State<getData> {
 
   //Methode that will connect the application with the web server in this ip (192.168.4.2) and get the data
   void getData(Database database) async {
-
     //Connect to the server IP
-    Response response = await get(Uri.parse('https://tshirtserver-group1.herokuapp.com/'));
+    Response response =
+        await get(Uri.parse('https://tshirtserver-group1.herokuapp.com/'));
 
     //Store the response body on the list with a split function
     temp = response.body.split(" ");
-
 
     //Increment the variables to those different variables
     frequence = temp[1];
@@ -65,12 +62,17 @@ class _getData extends State<getData> {
     print("NEWTIME ${formattedTime}");
 
     //Print on the console the data
-    print("Data : "+ formattedTime + "  "+ frequence.toString()
-        +"  "+ temperature.toString()+"  "+ humidity.toString());
+    print("Data : " +
+        formattedTime +
+        "  " +
+        frequence.toString() +
+        "  " +
+        temperature.toString() +
+        "  " +
+        humidity.toString());
 
     //Create object to send the data
     myData myTemp = myData(formattedTime, frequence, temperature, humidity);
-
 
     //We send the data to firebase event we didn't have the wifi
     database.sendData(myTemp);
@@ -95,13 +97,10 @@ class _getData extends State<getData> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-
   }
-
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -112,7 +111,11 @@ class _getData extends State<getData> {
                 primary: false,
                 children: <Widget>[
                   Card(
-                    color: (_dataFrequence.length!=0) ? (int.parse(_dataFrequence)>100) ? Colors.red : Colors.lightGreen : Colors.white,
+                    color: (_dataFrequence.length != 0)
+                        ? (int.parse(_dataFrequence) > 100)
+                            ? Colors.red
+                            : Colors.lightGreen
+                        : Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8)),
                     elevation: 4,
@@ -124,14 +127,18 @@ class _getData extends State<getData> {
                           size: 85.0,
                         ),
                         Text(
-                          "${(_dataFrequence.length!=0) ? "$_dataFrequence BPM": "Not connected"}",
+                          "${(_dataFrequence.length != 0) ? "$_dataFrequence BPM" : "Not connected"}",
                           style: cardStyle,
                         ),
                       ],
                     ),
                   ),
                   Card(
-                    color: (_dataTemperature.length!=0) ?(int.parse(_dataTemperature)>0) ? Colors.orangeAccent : Colors.amber : Colors.white,
+                    color: (_dataTemperature.length != 0)
+                        ? (int.parse(_dataTemperature) > 0)
+                            ? Colors.orangeAccent
+                            : Colors.amber
+                        : Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8)),
                     elevation: 4,
@@ -143,14 +150,18 @@ class _getData extends State<getData> {
                           size: 85.0,
                         ),
                         Text(
-                          "${(_dataTemperature.length!=0) ? "$_dataTemperature °C": "Not connected"}",
+                          "${(_dataTemperature.length != 0) ? "$_dataTemperature °C" : "Not connected"}",
                           style: cardStyle,
                         ),
                       ],
                     ),
                   ),
                   Card(
-                    color: (_dataHumidity.length!=0) ?(int.parse(_dataHumidity)>50) ? Colors.red : Colors.blue : Colors.white,
+                    color: (_dataHumidity.length != 0)
+                        ? (int.parse(_dataHumidity) > 50)
+                            ? Colors.red
+                            : Colors.blue
+                        : Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8)),
                     elevation: 4,
@@ -162,79 +173,78 @@ class _getData extends State<getData> {
                           size: 85.0,
                         ),
                         Text(
-                          "${(_dataHumidity.length!=0) ? "$_dataHumidity % of Humidity" : "Not connected"}",
+                          "${(_dataHumidity.length != 0) ? "$_dataHumidity % of Humidity" : "Not connected"}",
                           style: cardStyle,
                         ),
                       ],
                     ),
                   ),
                   Card(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                    elevation: 4,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          Icons.timer,
+                          size: 85.0,
+                        ),
+                        Text(
+                          "${(_dataTime.length != 0) ? _dataTime : "Not connected"}",
+                          style: cardStyle,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Card(
+                    color: Colors.green,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8)),
                     elevation: 4,
                     child: new InkWell(
-                      child: new Container(
-                        color: Colors.white70,
-                        child: new Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(
-                              Icons.timer,
-                              size: 85.0,
-                            ),
-                            Text(
-                              "${(_dataTime.length!=0) ? _dataTime : "Not connected"}",
-                              style: cardStyle,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Card(
-                    child: new InkWell(
                       onTap: () {
+                        print("Start");
                         startGetttingData();
                       },
-                      child: Container(
-                        color: Colors.green,
-                        child: new Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(
-                              Icons.play_arrow,
-                              size: 85.0,
-                            ),
-                            Text(
-                              "Start",
-                              style: cardStyle,
-                            ),
-                          ],
-                        ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                            Icons.play_arrow,
+                            size: 85.0,
+                          ),
+                          Text(
+                            "Start",
+                            style: cardStyle,
+                          ),
+                        ],
                       ),
                     ),
                   ),
                   Card(
+                    color: Colors.deepOrange,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                    elevation: 4,
                     child: new InkWell(
                       onTap: () {
                         print("Stop");
                         myTimer.cancel();
                       },
-                      child: Container(
-                        color: Colors.deepOrange,
-                        child: new Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(
-                              Icons.close,
-                              size: 85.0,
-                            ),
-                            Text(
-                              "Stop",
-                              style: cardStyle,
-                            ),
-                          ],
-                        ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Icon(
+                            Icons.close,
+                            size: 85.0,
+                          ),
+                          Text(
+                            "Stop",
+                            style: cardStyle,
+                          ),
+                        ],
                       ),
                     ),
                   ),
