@@ -25,6 +25,8 @@ class _getData extends State<getData> {
   String _dataTime = "";
   String _dataFrequence = "";
 
+  String url = "https://tshirtserver-group1.herokuapp.com/";
+
   bool timerStart = false;
   int activityCount = 0;
 
@@ -56,7 +58,7 @@ class _getData extends State<getData> {
 
   Future<bool> testConnection() async{
     try {
-      final response = await http.get(Uri.parse('http://192.168.4.2'));
+      final response = await http.get(Uri.parse(url));
     } on Exception {
       return false;
     }
@@ -65,7 +67,7 @@ class _getData extends State<getData> {
 
   //Methode that will connect the application with the web server in this ip (192.168.4.2) and get the data
   void getData(Database database) async {
-    final response = await http.get(Uri.parse('http://192.168.4.2'));
+    final response = await http.get(Uri.parse(url));
     temp = response.body.split(" ");
 
     //Increment the variables to those different variables
