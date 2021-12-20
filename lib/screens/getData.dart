@@ -26,6 +26,7 @@ class _getData extends State<getData> {
   String _dataFrequence = "";
 
   bool timerStart = false;
+  int activityCount = 0;
 
   //List that will stored one line of data per seconde
   late List<String> temp;
@@ -36,27 +37,27 @@ class _getData extends State<getData> {
   var temperature;
   var humidity;
 
-  void startGetttingData() {
-    if (testConnection() == true) {
+  Future<void> startGetttingData() async {
+    bool result = await testConnection();
+    if(result == true) {
       showDialog(context: context,
-          builder: (BuildContext context)=>_buildPopupDialog(context, "Activity started", "The activity has been correctly started") );
+          builder: (BuildContext context) =>
+              _buildPopupDialog(context, "Activity started",
+                  "The activity has been correctly started"));
+      activityCount = 1;
       timerStart = true;
       Database database = new Database();
       myTimer = Timer.periodic(Duration(seconds: 5), (timer) {
         //Methode that get all data
         getData(database);
       });
-    } else {
-      print("can't connect");
-      showDialog(context: context,
-          builder: (BuildContext context)=>_buildPopupDialog(context, "T-shirt not connected", "Please connect to the t-shirt first !!") );
     }
   }
 
-  Future<bool> testConnection() async {
+  Future<bool> testConnection() async{
     try {
       final response = await http.get(Uri.parse('http://192.168.4.2'));
-    } on SocketException {
+    } on Exception {
       return false;
     }
     return true;
@@ -221,9 +222,13 @@ class _getData extends State<getData> {
                         borderRadius: BorderRadius.circular(8)),
                     elevation: 4,
                     child: new InkWell(
-                      onTap: () {
-                        print("Start");
-                        startGetttingData();
+                      onTap: () async {
+                          if(activityCount == 0){
+                          startGetttingData();
+                          }else{
+                            showDialog(context: context,
+                                builder: (BuildContext context)=>_buildPopupDialog(context, "Can't start activity", "One activity is already started") );
+                          }
                       },
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -248,12 +253,13 @@ class _getData extends State<getData> {
                     child: new InkWell(
                       onTap: () {
                         print("Stop");
-                        if(timerStart == false){
+                        if(timerStart == false || activityCount == 0){
                           showDialog(context: context,
                               builder: (BuildContext context)=>_buildPopupDialog(context, "No activity to stop", "Please start an activity first") );
                         }else {
                           showDialog(context: context,
                               builder: (BuildContext context)=>_buildPopupDialog(context, "Activity stopped", "This activity has been correctly stopped") );
+                          activityCount = 0;
                           myTimer.cancel();
                         }
                       },
