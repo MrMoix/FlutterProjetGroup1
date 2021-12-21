@@ -68,7 +68,7 @@ class _FrequencyState extends State<Frequency> {
           keyData.add(DateTime.fromMillisecondsSinceEpoch(int.parse(timKey!))
               .toString());
           setState(() {
-            print("All key is ${keyData}");
+
           });
         });
       });
@@ -92,7 +92,6 @@ class _FrequencyState extends State<Frequency> {
       year = date.year;
       month = date.month;
       day = date.day;
-      print("le jour est ${year} ${month} ${day}");
       userData.forEach((key, value) {
         myData data = myData.fromJson(value);
         allData.add(data);
@@ -109,9 +108,7 @@ class _FrequencyState extends State<Frequency> {
         ;
       });
       setState(() {
-        print('Length : ${allData.length}');
-        print("max is ${max}");
-        print("min is ${min}");
+
       });
     });
   }
