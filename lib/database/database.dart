@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:projet_connected_t_shirt/data/myData.dart';
-import 'package:projet_connected_t_shirt/screens/getData.dart';
+import 'package:projet_connected_t_shirt/screens/board.dart';
 import '../main.dart';
 
 

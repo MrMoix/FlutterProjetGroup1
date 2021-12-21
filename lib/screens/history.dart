@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:projet_connected_t_shirt/screens/FrequencyChartsPage.dart';
-import 'package:projet_connected_t_shirt/screens/HumidityChartsPage.dart';
-import 'package:projet_connected_t_shirt/screens/TemperatureChartsPage.dart';
+import 'package:projet_connected_t_shirt/screens/historyFrequency.dart';
+import 'package:projet_connected_t_shirt/screens/historyHumidity.dart';
+import 'package:projet_connected_t_shirt/screens/historyTemperature.dart';
 
 
 class chartsPage extends StatefulWidget {

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:projet_connected_t_shirt/screens/introductionSlide.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -30,6 +31,10 @@ class LoginPageState extends State<LoginPage> {
     try {
       UserCredential userCredential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email, password: _password);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => IntroScreen()),
+      );
     } on FirebaseAuthException catch (e) {
       print("Error: $e");
     } catch (e) {
@@ -97,7 +102,9 @@ class LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 MaterialButton(
-                  onPressed: _createUser,
+                  onPressed: () {
+                    _createUser();
+                  },
                   child: Text("Create Account"),
                 ),
                 MaterialButton(
