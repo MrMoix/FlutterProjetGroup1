@@ -26,7 +26,7 @@ class tabBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DefaultTabController(
-        length: 4,
+        length: 3,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.deepOrange,
@@ -35,17 +35,14 @@ class tabBar extends StatelessWidget {
               tabs: [
 
                 Tab(
-                  icon: Icon(Icons.list),
-                  text: 'All data',
+                  icon: Icon(Icons.dashboard),
+                  text: 'Board',
                 ),
                 Tab(
                   icon: Icon(Icons.trending_up),
                   text: 'Charts',
                 ),
-                Tab(
-                  icon: Icon(Icons.dashboard),
-                  text: 'Board',
-                ),
+
                 Tab(
                   icon: Icon(Icons.settings),
                   text: 'Settings',
@@ -58,9 +55,8 @@ class tabBar extends StatelessWidget {
           backgroundColor: Colors.blueGrey,
           body: TabBarView(
             children: [
-              dataPage(),
-              chartsPage(),
               getData(),
+              chartsPage(),
               settingsPage(),
             ],
           ),

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:projet_connected_t_shirt/screens/dataPage.dart';
 
 class settingsPage extends StatefulWidget {
   const settingsPage({Key? key}) : super(key: key);
@@ -23,6 +24,30 @@ class _settingsPageState extends State<settingsPage> {
             ),
           ),
           Card(
+
+            child: ListTile(
+              title: Text("All data"),
+              leading: Icon(Icons.list),
+
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> dataPage()),
+                );
+              },
+            ),
+          ),
+          Card(
+
+            child: ListTile(
+              title: Text("How to use the app?"),
+              leading: Icon(Icons.preview),
+
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> dataPage()),
+                );
+              },
+            ),
+          ),
+          Card(
             child: ListTile(
               title: Text("Logout"),
               leading: Icon(Icons.logout),
@@ -36,3 +61,4 @@ class _settingsPageState extends State<settingsPage> {
     );
   }
 }
+
