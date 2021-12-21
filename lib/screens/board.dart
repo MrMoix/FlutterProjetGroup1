@@ -115,8 +115,10 @@ class _getData extends State<getData> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
+    if(activityCount == 1){
+      myTimer.cancel();
+    }
   }
 
   @override
@@ -259,10 +261,7 @@ class _getData extends State<getData> {
                           showDialog(context: context,
                               builder: (BuildContext context)=>_buildPopupDialog(context, "No activity to stop", "Please start an activity first") );
                         }else {
-                          showDialog(context: context,
-                              builder: (BuildContext context)=>_buildPopupDialog(context, "Activity stopped", "This activity has been correctly stopped") );
-                          activityCount = 0;
-                          myTimer.cancel();
+                          stopActivity();
                         }
                       },
                       child: Column(
@@ -308,5 +307,12 @@ class _getData extends State<getData> {
         ),
       ],
     );
+  }
+
+  void stopActivity() {
+    showDialog(context: context,
+        builder: (BuildContext context)=>_buildPopupDialog(context, "Activity stopped", "This activity has been correctly stopped") );
+    activityCount = 0;
+    myTimer.cancel();
   }
 }

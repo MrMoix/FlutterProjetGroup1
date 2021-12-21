@@ -67,7 +67,6 @@ class _HumidityState extends State<Humidity> {
           keyData.add(DateTime.fromMillisecondsSinceEpoch(int.parse(timKey!)).toString());
 
           setState(() {
-            print("All key is ${keyData}");
           });
         });
       });
@@ -93,7 +92,6 @@ class _HumidityState extends State<Humidity> {
       year = date.year;
       month = date.month;
       day = date.day;
-      print("le jour est ${year} ${month} ${day}");
       userData.forEach((key, value)  {
         myData data = myData.fromJson(value);
         allData.add(data);
@@ -110,7 +108,6 @@ class _HumidityState extends State<Humidity> {
         ;
       });
       setState(() {
-        print('Length : ${allData.length}');
       });
     });
   }
