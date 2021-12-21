@@ -128,7 +128,7 @@ class _TemperatureState extends State<Temperature> {
                       elevation: 16,
                       style: const TextStyle(color: Colors.black),
                       underline: Container(
-                        height: 2,
+                        height: 1,
                         color: Colors.deepOrange,
                       ),
                       onChanged: (String? newValue) {
@@ -151,8 +151,7 @@ class _TemperatureState extends State<Temperature> {
                       }).toList(),
                     )),
                 Container(
-                  height: 250,
-                  width: 400,
+                  constraints: BoxConstraints(minHeight: 250, minWidth: 400),
                   child:SfCartesianChart(
                     zoomPanBehavior: _zoomPanBehavior,
                     title: ChartTitle(text: 'Temperature activity'),
@@ -173,15 +172,14 @@ class _TemperatureState extends State<Temperature> {
                   ),
                 ),
                 Container(
-                  height: 250,
-                  width: 400,
+                  constraints: BoxConstraints(minHeight: 100, minWidth: double.infinity, maxHeight: 400),
                   child: GridView.count(
                       mainAxisSpacing: 3,
                       crossAxisSpacing: 3,
                       primary: false,
                       children: <Widget>[
                         Card(
-                          color: Colors.deepOrange,
+                          color: Colors.lightBlueAccent,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8)),
                           elevation: 4,

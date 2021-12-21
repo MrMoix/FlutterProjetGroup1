@@ -123,16 +123,21 @@ class _getData extends State<getData> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+
+
     return Scaffold(
       body: Stack(
         children: <Widget>[
           Container(
+            constraints: BoxConstraints(maxHeight: size.height, maxWidth: size.width),
             child: GridView.count(
                 mainAxisSpacing: 3,
                 crossAxisSpacing: 3,
                 primary: false,
                 children: <Widget>[
                   Card(
+
                     color: (_dataFrequence.length != 0)
                         ? (int.parse(_dataFrequence) > 100)
                             ? Colors.redAccent

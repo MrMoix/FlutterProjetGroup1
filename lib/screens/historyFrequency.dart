@@ -23,7 +23,7 @@ class _FrequencyState extends State<Frequency> {
   int min = 500;
 
   var cardStyle = TextStyle(
-      fontFamily: "Montserrat Regluar", fontSize: 18, color: Colors.black);
+      fontFamily: "Montserrat Regluar", fontSize: 20, color: Colors.black);
 
   late DatabaseReference ref;
   late final FirebaseAuth auth;
@@ -127,7 +127,7 @@ class _FrequencyState extends State<Frequency> {
               elevation: 16,
               style: const TextStyle(color: Colors.black),
               underline: Container(
-                height: 2,
+                height: 1,
                 color: Colors.deepOrange,
               ),
               onChanged: (String? newValue) {
@@ -150,8 +150,7 @@ class _FrequencyState extends State<Frequency> {
               }).toList(),
             )),
             Container(
-              height: 250,
-              width: 400,
+              constraints: BoxConstraints(minHeight: 250, minWidth: 400),
               child: SfCartesianChart(
                 zoomPanBehavior: _zoomPanBehavior,
                 title: ChartTitle(text: 'Heartbeat activity'),
@@ -176,15 +175,15 @@ class _FrequencyState extends State<Frequency> {
           ],
         ),
         Container(
-          height: 250,
-          width: 400,
+          constraints: BoxConstraints(minHeight: 100, minWidth: double.infinity, maxHeight: 400),
           child: GridView.count(
+
               mainAxisSpacing: 3,
               crossAxisSpacing: 3,
               primary: false,
               children: <Widget>[
                 Card(
-                  color: Colors.deepOrange,
+                  color: Colors.lightBlueAccent,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8)),
                   elevation: 4,
