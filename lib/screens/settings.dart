@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:projet_connected_t_shirt/screens/dataPage.dart';
+import 'package:projet_connected_t_shirt/screens/introductionSlide.dart';
+import 'package:projet_connected_t_shirt/screens/allData.dart';
 
 class settingsPage extends StatefulWidget {
   const settingsPage({Key? key}) : super(key: key);
@@ -42,7 +43,7 @@ class _settingsPageState extends State<settingsPage> {
               leading: Icon(Icons.preview),
 
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> dataPage()),
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> IntroScreen()),
                 );
               },
             ),

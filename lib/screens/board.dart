@@ -133,8 +133,8 @@ class _getData extends State<getData> {
                   Card(
                     color: (_dataFrequence.length != 0)
                         ? (int.parse(_dataFrequence) > 100)
-                            ? Colors.red
-                            : Colors.lightGreen
+                            ? Colors.redAccent
+                            : Colors.yellowAccent
                         : Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8)),
@@ -156,8 +156,8 @@ class _getData extends State<getData> {
                   Card(
                     color: (_dataTemperature.length != 0)
                         ? (int.parse(_dataTemperature) > 0)
-                            ? Colors.orangeAccent
-                            : Colors.amber
+                            ? Colors.yellowAccent
+                            : Colors.redAccent
                         : Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8)),
@@ -179,8 +179,8 @@ class _getData extends State<getData> {
                   Card(
                     color: (_dataHumidity.length != 0)
                         ? (int.parse(_dataHumidity) > 50)
-                            ? Colors.red
-                            : Colors.blue
+                            ? Colors.redAccent
+                            : Colors.yellowAccent
                         : Colors.white,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8)),

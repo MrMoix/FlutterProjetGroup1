@@ -2,11 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:projet_connected_t_shirt/screens/chartsPage.dart';
-import 'package:projet_connected_t_shirt/screens/getData.dart';
-import 'package:projet_connected_t_shirt/screens/loginpage.dart';
-import 'package:projet_connected_t_shirt/screens/dataPage.dart';
-import 'package:projet_connected_t_shirt/screens/settingsPage.dart';
+import 'package:projet_connected_t_shirt/screens/history.dart';
+import 'package:projet_connected_t_shirt/screens/board.dart';
+import 'package:projet_connected_t_shirt/screens/login.dart';
+import 'package:projet_connected_t_shirt/screens/allData.dart';
+import 'package:projet_connected_t_shirt/screens/settings.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,7 +40,7 @@ class tabBar extends StatelessWidget {
                 ),
                 Tab(
                   icon: Icon(Icons.trending_up),
-                  text: 'Charts',
+                  text: 'History',
                 ),
 
                 Tab(
