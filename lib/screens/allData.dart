@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:projet_connected_t_shirt/data/myData.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class dataPage extends StatefulWidget {
   const dataPage({Key? key}) : super(key: key);
@@ -80,10 +81,10 @@ class _dataPageState extends State<dataPage> {
 
   List<DataColumn> _createColumns() {
     return [
-      DataColumn(label: Text('Time')),
-      DataColumn(label: Text('Frequence')),
-      DataColumn(label: Text('Temperature')),
-      DataColumn(label: Text('Humidity'))
+      DataColumn(label: Text(AppLocalizations.of(context)!.time)),
+      DataColumn(label: Text(AppLocalizations.of(context)!.frequence)),
+      DataColumn(label: Text(AppLocalizations.of(context)!.humidity)),
+      DataColumn(label: Text(AppLocalizations.of(context)!.temperature))
     ];
   }
 

@@ -2,11 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:projet_connected_t_shirt/screens/history.dart';
 import 'package:projet_connected_t_shirt/screens/board.dart';
 import 'package:projet_connected_t_shirt/screens/login.dart';
-import 'package:projet_connected_t_shirt/screens/allData.dart';
 import 'package:projet_connected_t_shirt/screens/settings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: LandingPage());
+    return MaterialApp(
+      title: 'Connected tshirt App',
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en', ''), // English, no country code
+        Locale('de', ''), // Spanish, no country code
+      ],
+      home: LandingPage(),
+    );
   }
 }
 class tabBar extends StatelessWidget {
@@ -25,6 +39,16 @@ class tabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en', ''), // English, no country code
+        Locale('de', ''), // Spanish, no country code
+      ],
       home: DefaultTabController(
         length: 3,
         child: Scaffold(

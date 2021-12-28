@@ -1,0 +1,7 @@
+{
+        "notConnected": "Keine Verbindung",
+        "time": "Zeit",
+        "frequence": "Herzfrequenz",
+        "humidity": "Luftfeuchtigkeit",
+        "temperature": "Temperatur"
+}

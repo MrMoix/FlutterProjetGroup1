@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:projet_connected_t_shirt/data/myData.dart';
 import 'package:projet_connected_t_shirt/database/database.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class getData extends StatefulWidget {
   const getData({Key? key}) : super(key: key);
@@ -154,7 +154,7 @@ class _getData extends State<getData> {
                           size: 85.0,
                         ),
                         Text(
-                          "${(_dataFrequence.length != 0) ? "$_dataFrequence BPM" : "Not connected"}",
+                          "${(_dataFrequence.length != 0) ? "$_dataFrequence BPM" : AppLocalizations.of(context)?.notConnected}",
                           style: cardStyle,
                         ),
                       ],
@@ -177,7 +177,7 @@ class _getData extends State<getData> {
                           size: 85.0,
                         ),
                         Text(
-                          "${(_dataTemperature.length != 0) ? "$_dataTemperature °C" : "Not connected"}",
+                          "${(_dataTemperature.length != 0) ? "$_dataTemperature °C" : AppLocalizations.of(context)?.notConnected}",
                           style: cardStyle,
                         ),
                       ],
@@ -200,7 +200,7 @@ class _getData extends State<getData> {
                           size: 85.0,
                         ),
                         Text(
-                          "${(_dataHumidity.length != 0) ? "$_dataHumidity % of Humidity" : "Not connected"}",
+                          "${(_dataHumidity.length != 0) ? "$_dataHumidity %" : AppLocalizations.of(context)?.notConnected}",
                           style: cardStyle,
                         ),
                       ],
@@ -219,7 +219,7 @@ class _getData extends State<getData> {
                           size: 85.0,
                         ),
                         Text(
-                          "${(_dataTime.length != 0) ? _dataTime : "Not connected"}",
+                          "${(_dataTime.length != 0) ? _dataTime : AppLocalizations.of(context)?.notConnected}",
                           style: cardStyle,
                         ),
                       ],
