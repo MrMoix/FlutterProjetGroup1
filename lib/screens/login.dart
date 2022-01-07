@@ -60,7 +60,7 @@ class LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Login"),
+        title: Text(AppLocalizations.of(context)!.login),
         backgroundColor: Colors.deepOrange,
       ),
       body: Padding(
@@ -74,7 +74,7 @@ class LoginPageState extends State<LoginPage> {
                 _email =value;
               },
 
-              decoration: InputDecoration(hintText: "Enter Email"),
+              decoration: InputDecoration(hintText: AppLocalizations.of(context)!.enterEmail),
 
             ),
             TextField(
@@ -86,7 +86,7 @@ class LoginPageState extends State<LoginPage> {
                 },
               obscureText: _isObscure,
               decoration: InputDecoration(
-                labelText: "Enter Password",
+                labelText: AppLocalizations.of(context)!.enterPassword,
                 suffixIcon:IconButton(
                   icon:  Icon(
                     _isObscure ? Icons.visibility  :Icons.visibility_off
@@ -106,12 +106,12 @@ class LoginPageState extends State<LoginPage> {
                   onPressed: () {
                     _createUser();
                   },
-                  child: Text("Create Account"),
+                  child: Text(AppLocalizations.of(context)!.createAccount),
                 ),
                 MaterialButton(
                   onPressed: _loginUser
                   ,
-                  child: Text("Login"),
+                  child: Text(AppLocalizations.of(context)!.login),
                 ),
               ],
             )

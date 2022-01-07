@@ -9,6 +9,7 @@
     "minimumValue": "Valeur minimum",
     "noActivitySelected": "Aucune activitée selectionnée",
     "maximumValue": "Valeur Maximum",
+    "temperatureActivity": "Temperature",
     "humidityActivity": "Humidité de l'air",
     "home": "Accueil",
     "signOut": "Se déconnecter",

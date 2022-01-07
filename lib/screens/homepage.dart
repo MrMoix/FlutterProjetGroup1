@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home"),
+        title: Text(AppLocalizations.of(context)!.home),
       ),
       body: Center(
         child: MaterialButton(
@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
               await FirebaseAuth.instance.signOut();
 
             },
-          child: Text("Sign out"),
+          child: Text(AppLocalizations.of(context)!.signOut),
         ),
       ),
     );

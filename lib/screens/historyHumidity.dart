@@ -154,7 +154,7 @@ class _HumidityState extends State<Humidity> {
                   constraints: BoxConstraints(minHeight: 250, minWidth: 400),
                   child:SfCartesianChart(
                     zoomPanBehavior: _zoomPanBehavior,
-                    title: ChartTitle(text: 'Humidity activity'),
+                    title: ChartTitle(text: AppLocalizations.of(context)!.humidityActivity),
                     legend: Legend(isVisible: false),
                     series: <ChartSeries>[
                       ColumnSeries<myData, DateTime>(
@@ -186,11 +186,11 @@ class _HumidityState extends State<Humidity> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Text(
-                                  "Mimimum value : ",
+                                  AppLocalizations.of(context)!.minimumValue + " : ",
                                   style: cardStyle,
                                 ),
                                 Text(
-                                  (min == 500) ? "No activity selected" : "${min} Humidity",
+                                  (min == 500) ? AppLocalizations.of(context)!.noActivitySelected : "${min} %",
                                   style: cardStyle,
                                 ),
                               ],
@@ -209,11 +209,11 @@ class _HumidityState extends State<Humidity> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Text(
-                                  "Maximum value : ",
+                                  AppLocalizations.of(context)!.maximumValue + " : ",
                                   style: cardStyle,
                                 ),
                                 Text(
-                                  (max == 0) ? "No activity selected" : "${max} Humidity",
+                                  (max == 0) ? AppLocalizations.of(context)!.noActivitySelected : "${max} %",
                                   style: cardStyle,
                                 ),
                               ],

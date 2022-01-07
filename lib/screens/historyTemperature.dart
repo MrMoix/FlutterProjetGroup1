@@ -155,7 +155,7 @@ class _TemperatureState extends State<Temperature> {
                   constraints: BoxConstraints(minHeight: 250, minWidth: 400),
                   child:SfCartesianChart(
                     zoomPanBehavior: _zoomPanBehavior,
-                    title: ChartTitle(text: 'Temperature activity'),
+                    title: ChartTitle(text: AppLocalizations.of(context)!.temperatureActivity),
                     legend: Legend(isVisible: false),
                     series: <ChartSeries>[
                       AreaSeries<myData, DateTime>(
@@ -191,11 +191,11 @@ class _TemperatureState extends State<Temperature> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Text(
-                                  "Mimimum value : ",
+                                  AppLocalizations.of(context)!.minimumValue + " : ",
                                   style: cardStyle,
                                 ),
                                 Text(
-                                  (min == 500) ? "No activity selected" : "${min} °",
+                                  (min == 500) ? AppLocalizations.of(context)!.noActivitySelected : "${min} °",
                                   style: cardStyle,
                                 ),
                               ],
@@ -214,11 +214,11 @@ class _TemperatureState extends State<Temperature> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Text(
-                                  "Maximum value : ",
+                                  AppLocalizations.of(context)!.maximumValue + " : ",
                                   style: cardStyle,
                                 ),
                                 Text(
-                                  (max == 0) ? "No activity selected" : "${max} °",
+                                  (max == 0) ? AppLocalizations.of(context)!.noActivitySelected : "${max} °",
                                   style: cardStyle,
                                 ),
                               ],

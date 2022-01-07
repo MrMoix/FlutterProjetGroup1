@@ -21,14 +21,14 @@ class _settingsPageState extends State<settingsPage> {
         children: <Widget>[
           Card(
             child: ListTile(
-              title: Text("Language"),
+              title: Text(AppLocalizations.of(context)!.language),
               leading: Icon(Icons.language),
             ),
           ),
           Card(
 
             child: ListTile(
-              title: Text("All data"),
+              title: Text(AppLocalizations.of(context)!.allData),
               leading: Icon(Icons.list),
 
               onTap: (){
@@ -40,7 +40,7 @@ class _settingsPageState extends State<settingsPage> {
           Card(
 
             child: ListTile(
-              title: Text("How to use the app?"),
+              title: Text(AppLocalizations.of(context)!.howToUseTheApp),
               leading: Icon(Icons.preview),
 
               onTap: (){
@@ -51,7 +51,7 @@ class _settingsPageState extends State<settingsPage> {
           ),
           Card(
             child: ListTile(
-              title: Text("Logout"),
+              title: Text(AppLocalizations.of(context)!.logout),
               leading: Icon(Icons.logout),
               onTap: () async {
                 await FirebaseAuth.instance.signOut();

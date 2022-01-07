@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Connected tshirt App',
+      title: 'Connected T-Shirt',
       localizationsDelegates: [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -54,26 +54,26 @@ class tabBar extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.deepOrange,
-            bottom: const TabBar(
+            bottom: TabBar(
 
               tabs: [
 
                 Tab(
                   icon: Icon(Icons.dashboard),
-                  text: 'Board',
+                  text: AppLocalizations.of(context)!.board,
                 ),
                 Tab(
                   icon: Icon(Icons.trending_up),
-                  text: 'History',
+                  text: AppLocalizations.of(context)!.history,
                 ),
 
                 Tab(
                   icon: Icon(Icons.settings),
-                  text: 'Settings',
+                  text: AppLocalizations.of(context)!.settings,
                 ),
               ],
             ),
-            title: const Text('Connected T-Shirt'),
+            title: Text(AppLocalizations.of(context)!.connectedTshirt),
 
           ),
           backgroundColor: Colors.blueGrey,
@@ -101,9 +101,9 @@ class LandingPage extends StatelessWidget {
         future: _init,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return const Scaffold(
+            return Scaffold(
               body: Center(
-                child: Text("Error"),
+                child: Text(AppLocalizations.of(context)!.error),
               ),
             );
           }
@@ -120,17 +120,17 @@ class LandingPage extends StatelessWidget {
 
                   }
                 }
-                return const Scaffold(
+                return Scaffold(
                   body: Center(
-                    child: Text("Checking Auth"),
+                    child: Text(AppLocalizations.of(context)!.checkingAuth),
                   ),
                 );
               },
             );
           }
-          return const Scaffold(
+          return Scaffold(
             body: Center(
-              child: Text("Connected"),
+              child: Text(AppLocalizations.of(context)!.connected),
             ),
           );
         });

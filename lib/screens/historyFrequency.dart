@@ -17,14 +17,14 @@ class Frequency extends StatefulWidget {
 class _FrequencyState extends State<Frequency> {
   List<myData> allData = [];
   late int year, month, day;
-  List<String> keyData = [];
+  String dropdownValue = 'Select activities';
+  List<String> keyData = ['Select activities'];
   late ZoomPanBehavior _zoomPanBehavior;
   int max = 0;
   int min = 500;
-  bool firstBuild = true;
+
   var cardStyle = TextStyle(
       fontFamily: "Montserrat Regluar", fontSize: 20, color: Colors.black);
-  String dropdownValue = "";
   late DatabaseReference ref;
   late final FirebaseAuth auth;
   late final User user;
@@ -36,6 +36,7 @@ class _FrequencyState extends State<Frequency> {
     auth = FirebaseAuth.instance;
     User? user = auth.currentUser;
     uid = user!.uid;
+    _getActivityKeys();
     _zoomPanBehavior = ZoomPanBehavior(
       // Enables pinch zooming
       enablePinching: true,
@@ -114,13 +115,6 @@ class _FrequencyState extends State<Frequency> {
 
   @override
   Widget build(BuildContext context) {
-    if(firstBuild){
-      dropdownValue = AppLocalizations.of(context)!.selectActivities;
-      keyData.add(AppLocalizations.of(context)!.selectActivities);
-      _getActivityKeys();
-      firstBuild = false;
-      print(keyData);
-    }
     return Scaffold(
         body: ListView(
       children: <Widget>[
@@ -159,7 +153,7 @@ class _FrequencyState extends State<Frequency> {
               constraints: BoxConstraints(minHeight: 250, minWidth: 400),
               child: SfCartesianChart(
                 zoomPanBehavior: _zoomPanBehavior,
-                title: ChartTitle(text: 'Heartbeat activity'),
+                title: ChartTitle(text: AppLocalizations.of(context)!.heartbeatActivity),
                 legend: Legend(isVisible: false),
                 series: <ChartSeries>[
                   LineSeries<myData, DateTime>(
@@ -200,11 +194,11 @@ class _FrequencyState extends State<Frequency> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          "Mimimum value : ",
+                          AppLocalizations.of(context)!.minimumValue + ": ",
                           style: cardStyle,
                         ),
                         Text(
-                          (min == 500) ? "No activity selected" : "${min} BPM",
+                          (min == 500) ? AppLocalizations.of(context)!.noActivitySelected : "${min} BPM",
                           style: cardStyle,
                         ),
                       ],
@@ -223,11 +217,11 @@ class _FrequencyState extends State<Frequency> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          "Maximum value : ",
+                          AppLocalizations.of(context)!.maximumValue + " : ",
                           style: cardStyle,
                         ),
                         Text(
-                          (max == 0) ? "No activity selected" : "${max} BPM",
+                          (max == 0) ? AppLocalizations.of(context)!.noActivitySelected : "${max} BPM",
                           style: cardStyle,
                         ),
                       ],

@@ -24,25 +24,24 @@ class IntroScreenState extends State<IntroScreen> {
 
     slides.add(
       new Slide(
-        title: "DASHBOARD",
-        description: "Access a dashboard that shows your t-shirt data in realtime.",
+        title: AppLocalizations.of(context)!.dashboardTitle,
+        description: AppLocalizations.of(context)!.dashboardDescription,
         pathImage: "assets/images/liveData.png",
         backgroundColor: Color(0xfff5a623),
       ),
     );
     slides.add(
       new Slide(
-        title: "HISTORY",
-        description: "Access information about you last activities, by seeing chart about data stored.",
+        title: AppLocalizations.of(context)!.historyTitle,
+        description: AppLocalizations.of(context)!.historyDescription,
         pathImage: "assets/images/chart.png",
         backgroundColor: Color(0xff203152),
       ),
     );
     slides.add(
       new Slide(
-        title: "SETTINGS",
-        description:
-        "Access a settings page, that allows you to change the language, access all data stored, or logout.",
+        title: AppLocalizations.of(context)!.settingsTitle,
+        description: AppLocalizations.of(context)!.settingsDescription,
         pathImage: "assets/images/settings.png",
         backgroundColor: Color(0xff9932CC),
       ),
