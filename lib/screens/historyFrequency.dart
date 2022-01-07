@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:projet_connected_t_shirt/data/myData.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Frequency extends StatefulWidget {
   const Frequency({Key? key}) : super(key: key);
@@ -16,15 +17,14 @@ class Frequency extends StatefulWidget {
 class _FrequencyState extends State<Frequency> {
   List<myData> allData = [];
   late int year, month, day;
-  String dropdownValue = 'Select activities';
-  List<String> keyData = ['Select activities'];
+  List<String> keyData = [];
   late ZoomPanBehavior _zoomPanBehavior;
   int max = 0;
   int min = 500;
-
+  bool firstBuild = true;
   var cardStyle = TextStyle(
       fontFamily: "Montserrat Regluar", fontSize: 20, color: Colors.black);
-
+  String dropdownValue = "";
   late DatabaseReference ref;
   late final FirebaseAuth auth;
   late final User user;
@@ -36,7 +36,6 @@ class _FrequencyState extends State<Frequency> {
     auth = FirebaseAuth.instance;
     User? user = auth.currentUser;
     uid = user!.uid;
-    _getActivityKeys();
     _zoomPanBehavior = ZoomPanBehavior(
       // Enables pinch zooming
       enablePinching: true,
@@ -115,6 +114,13 @@ class _FrequencyState extends State<Frequency> {
 
   @override
   Widget build(BuildContext context) {
+    if(firstBuild){
+      dropdownValue = AppLocalizations.of(context)!.selectActivities;
+      keyData.add(AppLocalizations.of(context)!.selectActivities);
+      _getActivityKeys();
+      firstBuild = false;
+      print(keyData);
+    }
     return Scaffold(
         body: ListView(
       children: <Widget>[

@@ -4,6 +4,7 @@ import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
 import 'package:projet_connected_t_shirt/main.dart';
 import 'package:projet_connected_t_shirt/screens/board.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'allData.dart';
 

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:projet_connected_t_shirt/data/myData.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Temperature extends StatefulWidget {
   const Temperature({Key? key}) : super(key: key);
