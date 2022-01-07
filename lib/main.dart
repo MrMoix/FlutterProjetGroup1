@@ -2,11 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:projet_connected_t_shirt/screens/history.dart';
 import 'package:projet_connected_t_shirt/screens/board.dart';
 import 'package:projet_connected_t_shirt/screens/login.dart';
-import 'package:projet_connected_t_shirt/screens/allData.dart';
 import 'package:projet_connected_t_shirt/screens/settings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: LandingPage());
+    return MaterialApp(
+      title: 'Connected T-Shirt',
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en', ''), // English, no country code
+        Locale('de', ''), // Spanish, no country code
+      ],
+      home: LandingPage(),
+    );
   }
 }
 class tabBar extends StatelessWidget {
@@ -25,31 +39,41 @@ class tabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en', ''), // English, no country code
+        Locale('de', ''), // Spanish, no country code
+      ],
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.deepOrange,
-            bottom: const TabBar(
+            bottom: TabBar(
 
               tabs: [
 
                 Tab(
                   icon: Icon(Icons.dashboard),
-                  text: 'Board',
+                  text: AppLocalizations.of(context)!.board,
                 ),
                 Tab(
                   icon: Icon(Icons.trending_up),
-                  text: 'History',
+                  text: AppLocalizations.of(context)!.history,
                 ),
 
                 Tab(
                   icon: Icon(Icons.settings),
-                  text: 'Settings',
+                  text: AppLocalizations.of(context)!.settings,
                 ),
               ],
             ),
-            title: const Text('Connected T-Shirt'),
+            title: Text(AppLocalizations.of(context)!.connectedTshirt),
 
           ),
           backgroundColor: Colors.blueGrey,
@@ -77,9 +101,9 @@ class LandingPage extends StatelessWidget {
         future: _init,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            return const Scaffold(
+            return Scaffold(
               body: Center(
-                child: Text("Error"),
+                child: Text(AppLocalizations.of(context)!.error),
               ),
             );
           }
@@ -96,17 +120,17 @@ class LandingPage extends StatelessWidget {
 
                   }
                 }
-                return const Scaffold(
+                return Scaffold(
                   body: Center(
-                    child: Text("Checking Auth"),
+                    child: Text(AppLocalizations.of(context)!.checkingAuth),
                   ),
                 );
               },
             );
           }
-          return const Scaffold(
+          return Scaffold(
             body: Center(
-              child: Text("Connected"),
+              child: Text(AppLocalizations.of(context)!.connected),
             ),
           );
         });

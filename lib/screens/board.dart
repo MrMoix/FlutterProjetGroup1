@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:projet_connected_t_shirt/data/myData.dart';
 import 'package:projet_connected_t_shirt/database/database.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class getData extends StatefulWidget {
   const getData({Key? key}) : super(key: key);
@@ -44,8 +44,8 @@ class _getData extends State<getData> {
     if(result == true) {
       showDialog(context: context,
           builder: (BuildContext context) =>
-              _buildPopupDialog(context, "Activity started",
-                  "The activity has been correctly started"));
+              _buildPopupDialog(context, AppLocalizations.of(context)!.activityStarted,
+                  AppLocalizations.of(context)!.activityStartConfirmation));
       activityCount = 1;
       timerStart = true;
       Database database = new Database();
@@ -154,7 +154,7 @@ class _getData extends State<getData> {
                           size: 85.0,
                         ),
                         Text(
-                          "${(_dataFrequence.length != 0) ? "$_dataFrequence BPM" : "Not connected"}",
+                          "${(_dataFrequence.length != 0) ? "$_dataFrequence BPM" : AppLocalizations.of(context)?.notConnected}",
                           style: cardStyle,
                         ),
                       ],
@@ -177,7 +177,7 @@ class _getData extends State<getData> {
                           size: 85.0,
                         ),
                         Text(
-                          "${(_dataTemperature.length != 0) ? "$_dataTemperature °C" : "Not connected"}",
+                          "${(_dataTemperature.length != 0) ? "$_dataTemperature °C" : AppLocalizations.of(context)?.notConnected}",
                           style: cardStyle,
                         ),
                       ],
@@ -200,7 +200,7 @@ class _getData extends State<getData> {
                           size: 85.0,
                         ),
                         Text(
-                          "${(_dataHumidity.length != 0) ? "$_dataHumidity % of Humidity" : "Not connected"}",
+                          "${(_dataHumidity.length != 0) ? "$_dataHumidity %" : AppLocalizations.of(context)?.notConnected}",
                           style: cardStyle,
                         ),
                       ],
@@ -219,7 +219,7 @@ class _getData extends State<getData> {
                           size: 85.0,
                         ),
                         Text(
-                          "${(_dataTime.length != 0) ? _dataTime : "Not connected"}",
+                          "${(_dataTime.length != 0) ? _dataTime : AppLocalizations.of(context)?.notConnected}",
                           style: cardStyle,
                         ),
                       ],
@@ -236,7 +236,7 @@ class _getData extends State<getData> {
                           startGetttingData();
                           }else{
                             showDialog(context: context,
-                                builder: (BuildContext context)=>_buildPopupDialog(context, "Can't start activity", "One activity is already started") );
+                                builder: (BuildContext context)=>_buildPopupDialog(context, AppLocalizations.of(context)!.cantStartActivity, AppLocalizations.of(context)!.alreadyStarted) );
                           }
                       },
                       child: Column(
@@ -247,7 +247,7 @@ class _getData extends State<getData> {
                             size: 85.0,
                           ),
                           Text(
-                            "Start",
+                            AppLocalizations.of(context)!.start,
                             style: cardStyle,
                           ),
                         ],
@@ -261,10 +261,10 @@ class _getData extends State<getData> {
                     elevation: 4,
                     child: new InkWell(
                       onTap: () {
-                        print("Stop");
+                        print(AppLocalizations.of(context)!.stop);
                         if(timerStart == false || activityCount == 0){
                           showDialog(context: context,
-                              builder: (BuildContext context)=>_buildPopupDialog(context, "No activity to stop", "Please start an activity first") );
+                              builder: (BuildContext context)=>_buildPopupDialog(context, AppLocalizations.of(context)!.noActivityToStop, AppLocalizations.of(context)!.startFirst) );
                         }else {
                           stopActivity();
                         }
@@ -277,7 +277,7 @@ class _getData extends State<getData> {
                             size: 85.0,
                           ),
                           Text(
-                            "Stop",
+                            AppLocalizations.of(context)!.stop,
                             style: cardStyle,
                           ),
                         ],
@@ -308,7 +308,7 @@ class _getData extends State<getData> {
             Navigator.of(context).pop();
           },
           textColor: Theme.of(context).primaryColor,
-          child: const Text('Close'),
+          child: Text(AppLocalizations.of(context)!.close),
         ),
       ],
     );
@@ -316,7 +316,7 @@ class _getData extends State<getData> {
 
   void stopActivity() {
     showDialog(context: context,
-        builder: (BuildContext context)=>_buildPopupDialog(context, "Activity stopped", "This activity has been correctly stopped") );
+        builder: (BuildContext context)=>_buildPopupDialog(context, AppLocalizations.of(context)!.activityStopped, AppLocalizations.of(context)!.activityStopConfirmation) );
     activityCount = 0;
     myTimer.cancel();
   }

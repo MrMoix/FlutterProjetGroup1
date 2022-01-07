@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -14,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home"),
+        title: Text(AppLocalizations.of(context)!.home),
       ),
       body: Center(
         child: MaterialButton(
@@ -22,7 +23,7 @@ class _HomePageState extends State<HomePage> {
               await FirebaseAuth.instance.signOut();
 
             },
-          child: Text("Sign out"),
+          child: Text(AppLocalizations.of(context)!.signOut),
         ),
       ),
     );

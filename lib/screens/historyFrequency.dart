@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:projet_connected_t_shirt/data/myData.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Frequency extends StatefulWidget {
   const Frequency({Key? key}) : super(key: key);
@@ -24,7 +25,6 @@ class _FrequencyState extends State<Frequency> {
 
   var cardStyle = TextStyle(
       fontFamily: "Montserrat Regluar", fontSize: 20, color: Colors.black);
-
   late DatabaseReference ref;
   late final FirebaseAuth auth;
   late final User user;
@@ -153,7 +153,7 @@ class _FrequencyState extends State<Frequency> {
               constraints: BoxConstraints(minHeight: 250, minWidth: 400),
               child: SfCartesianChart(
                 zoomPanBehavior: _zoomPanBehavior,
-                title: ChartTitle(text: 'Heartbeat activity'),
+                title: ChartTitle(text: AppLocalizations.of(context)!.heartbeatActivity),
                 legend: Legend(isVisible: false),
                 series: <ChartSeries>[
                   LineSeries<myData, DateTime>(
@@ -194,11 +194,11 @@ class _FrequencyState extends State<Frequency> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          "Mimimum value : ",
+                          AppLocalizations.of(context)!.minimumValue + ": ",
                           style: cardStyle,
                         ),
                         Text(
-                          (min == 500) ? "No activity selected" : "${min} BPM",
+                          (min == 500) ? AppLocalizations.of(context)!.noActivitySelected : "${min} BPM",
                           style: cardStyle,
                         ),
                       ],
@@ -217,11 +217,11 @@ class _FrequencyState extends State<Frequency> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          "Maximum value : ",
+                          AppLocalizations.of(context)!.maximumValue + " : ",
                           style: cardStyle,
                         ),
                         Text(
-                          (max == 0) ? "No activity selected" : "${max} BPM",
+                          (max == 0) ? AppLocalizations.of(context)!.noActivitySelected : "${max} BPM",
                           style: cardStyle,
                         ),
                       ],
