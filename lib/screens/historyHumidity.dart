@@ -25,7 +25,7 @@ class _HumidityState extends State<Humidity> {
   int min = 500;
 
   var cardStyle = TextStyle(
-      fontFamily: "Montserrat Regluar", fontSize: 20, color: Colors.black);
+      fontFamily: "Montserrat Regluar", fontSize: 18, color: Colors.black);
 
   late DatabaseReference ref;
   late final FirebaseAuth auth;

@@ -24,7 +24,7 @@ class _FrequencyState extends State<Frequency> {
   int min = 500;
 
   var cardStyle = TextStyle(
-      fontFamily: "Montserrat Regluar", fontSize: 20, color: Colors.black);
+      fontFamily: "Montserrat Regluar", fontSize: 18, color: Colors.black);
   late DatabaseReference ref;
   late final FirebaseAuth auth;
   late final User user;
@@ -194,7 +194,7 @@ class _FrequencyState extends State<Frequency> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          AppLocalizations.of(context)!.minimumValue + ": ",
+                          AppLocalizations.of(context)!.minimumValue + " : ",
                           style: cardStyle,
                         ),
                         Text(
