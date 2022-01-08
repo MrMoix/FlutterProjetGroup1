@@ -7,7 +7,7 @@
     "selectActivities": "Aktivität auswählen",
     "heartbeatActivity": "Herzschlagaktivität",
     "minimumValue": "Minimaler Wert",
-    "noActivitySelected": "Keine Aktivität ausgewählt",
+    "noActivitySelected": "Keine Daten",
     "maximumValue": "Maximaler Wert",
     "temperatureActivity": "Temperaturaktivität",
     "humidityActivity": "Luftfeuchtigkeitsaktivität",

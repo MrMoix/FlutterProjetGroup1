@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: [
+        Locale('fr', ''),
         Locale('en', ''), // English, no country code
         Locale('de', ''), // Spanish, no country code
       ],
@@ -46,6 +47,7 @@ class tabBar extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: [
+        Locale('fr', ''),
         Locale('en', ''), // English, no country code
         Locale('de', ''), // Spanish, no country code
       ],

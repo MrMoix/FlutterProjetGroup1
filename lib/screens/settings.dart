@@ -20,12 +20,6 @@ class _settingsPageState extends State<settingsPage> {
         padding: const EdgeInsets.all(8),
         children: <Widget>[
           Card(
-            child: ListTile(
-              title: Text(AppLocalizations.of(context)!.language),
-              leading: Icon(Icons.language),
-            ),
-          ),
-          Card(
 
             child: ListTile(
               title: Text(AppLocalizations.of(context)!.allData),

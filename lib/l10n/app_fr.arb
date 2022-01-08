@@ -7,7 +7,7 @@
     "selectActivities": "Selectionner une activitée",
     "heartbeatActivity": "Frequence cardiaque",
     "minimumValue": "Valeur minimum",
-    "noActivitySelected": "Aucune activitée selectionnée",
+    "noActivitySelected": "Aucune données",
     "maximumValue": "Valeur Maximum",
     "temperatureActivity": "Temperature",
     "humidityActivity": "Humidité de l'air",
