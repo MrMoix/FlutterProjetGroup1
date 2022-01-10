@@ -7,17 +7,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
-  Future<void> _createUser() async {
-    try {
-      UserCredential userCredential =
-          await FirebaseAuth.instance.signInAnonymously();
-    } on FirebaseAuthException catch (e) {
-      print("Error: $e");
-    } catch (e) {
-      print("Error: $e");
-    }
-  }
-
   @override
   LoginPageState createState() => LoginPageState();
 }

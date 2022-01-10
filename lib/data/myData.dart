@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class myData {
   var time, frequence, temperature, humidity;
 
