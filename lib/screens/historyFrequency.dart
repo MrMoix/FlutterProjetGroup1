@@ -50,19 +50,15 @@ class _FrequencyState extends State<Frequency> {
         .child(uid)
         .once()
         .then((DataSnapshot snap) {
-      //I have to count the children element here :
       Map activityData = snap.value;
       var userKey = snap.key;
       activityData.forEach((key, value) {
         ref
             .child('Customer')
-            //This child has to be the connected user ID
             .child(userKey!)
             .child(key)
             .once()
             .then((DataSnapshot snap) {
-          //I have to count the children element here :
-          Map timeData = snap.value;
           var timKey = snap.key;
           keyData.add(DateTime.fromMillisecondsSinceEpoch(int.parse(timKey!))
               .toString());
