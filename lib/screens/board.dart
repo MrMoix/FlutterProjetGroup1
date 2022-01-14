@@ -25,7 +25,7 @@ class _getData extends State<getData> {
   String _dataTime = "";
   String _dataFrequence = "";
 
-  String url = "http://192.168.4.2";
+  String url = "https://tshirtserver-group1.herokuapp.com/";
 
   bool timerStart = false;
   int activityCount = 0;

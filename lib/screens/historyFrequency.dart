@@ -9,6 +9,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Frequency extends StatefulWidget {
   const Frequency({Key? key}) : super(key: key);
+
   @override
   _FrequencyState createState() => _FrequencyState();
 }
@@ -62,9 +63,7 @@ class _FrequencyState extends State<Frequency> {
           var timKey = snap.key;
           keyData.add(DateTime.fromMillisecondsSinceEpoch(int.parse(timKey!))
               .toString());
-          setState(() {
-
-          });
+          setState(() {});
         });
       });
       setState(() {});
@@ -102,9 +101,7 @@ class _FrequencyState extends State<Frequency> {
         }
         ;
       });
-      setState(() {
-
-      });
+      setState(() {});
     });
   }
 
@@ -148,7 +145,8 @@ class _FrequencyState extends State<Frequency> {
               constraints: BoxConstraints(minHeight: 250, minWidth: 400),
               child: SfCartesianChart(
                 zoomPanBehavior: _zoomPanBehavior,
-                title: ChartTitle(text: AppLocalizations.of(context)!.heartbeatActivity),
+                title: ChartTitle(
+                    text: AppLocalizations.of(context)!.heartbeatActivity),
                 legend: Legend(isVisible: false),
                 series: <ChartSeries>[
                   LineSeries<myData, DateTime>(
@@ -163,16 +161,17 @@ class _FrequencyState extends State<Frequency> {
                       yValueMapper: (myData dataRow, _) =>
                           double.parse(dataRow.frequence))
                 ],
-                primaryXAxis: DateTimeAxis(isVisible: true, dateFormat : DateFormat("hh:mm:ss")),
+                primaryXAxis: DateTimeAxis(
+                    isVisible: true, dateFormat: DateFormat("hh:mm:ss")),
                 primaryYAxis: NumericAxis(numberFormat: NumberFormat("###")),
               ),
             )
           ],
         ),
         Container(
-          constraints: BoxConstraints(minHeight: 100, minWidth: double.infinity, maxHeight: 400),
+          constraints: BoxConstraints(
+              minHeight: 100, minWidth: double.infinity, maxHeight: 400),
           child: GridView.count(
-
               mainAxisSpacing: 3,
               crossAxisSpacing: 3,
               primary: false,
@@ -183,8 +182,7 @@ class _FrequencyState extends State<Frequency> {
                       borderRadius: BorderRadius.circular(8)),
                   elevation: 4,
                   child: new InkWell(
-                    onTap: () {
-                    },
+                    onTap: () {},
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -193,7 +191,9 @@ class _FrequencyState extends State<Frequency> {
                           style: cardStyle,
                         ),
                         Text(
-                          (min == 500) ? AppLocalizations.of(context)!.noActivitySelected : "${min} BPM",
+                          (min == 500)
+                              ? AppLocalizations.of(context)!.noActivitySelected
+                              : "${min} BPM",
                           style: cardStyle,
                         ),
                       ],
@@ -206,8 +206,7 @@ class _FrequencyState extends State<Frequency> {
                       borderRadius: BorderRadius.circular(8)),
                   elevation: 4,
                   child: new InkWell(
-                    onTap: () {
-                    },
+                    onTap: () {},
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -216,7 +215,9 @@ class _FrequencyState extends State<Frequency> {
                           style: cardStyle,
                         ),
                         Text(
-                          (max == 0) ? AppLocalizations.of(context)!.noActivitySelected : "${max} BPM",
+                          (max == 0)
+                              ? AppLocalizations.of(context)!.noActivitySelected
+                              : "${max} BPM",
                           style: cardStyle,
                         ),
                       ],
